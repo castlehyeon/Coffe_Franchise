@@ -1,5 +1,8 @@
 package store;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Store extends Headquarter{
 	
 	private int storeCode;		//가게코드
@@ -7,12 +10,14 @@ public class Store extends Headquarter{
 	private String address;		//주소
 	private String phoneNumber;	//핸드폰번호
 	private int totalSales;		//총 매출
+	private List<Sales> salesList;	//주문 정보
 	
 	public Store(String name, String address, String phoneNumber) {
 		this.name = name;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
 		this.storeCode = storeCode + 1;
+		this.salesList = new ArrayList<Sales>();
 	}
 
 
@@ -63,6 +68,16 @@ public class Store extends Headquarter{
 
 	public void setTotalSales(int totalSales) {
 		this.totalSales = totalSales;
+	}
+	
+
+	public List<Sales> getSalesList() {
+		return salesList;
+	}
+
+
+	public void setSalesList(List<Sales> salesList) {
+		this.salesList = salesList;
 	}
 
 
