@@ -1,0 +1,17 @@
+package payment;
+
+import java.time.LocalDateTime;
+
+public abstract class Payment {
+	private int PaymetAmount;
+	private LocalDateTime PaymentTime;
+
+	public int getPaymetAmount() {
+		return PaymetAmount;
+	}
+
+	public void setPaymetAmount(int paymetAmount) {
+		PaymetAmount = paymetAmount;
+	}
+	
+}
