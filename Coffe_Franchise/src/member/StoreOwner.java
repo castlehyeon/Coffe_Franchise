@@ -1,14 +1,10 @@
 package member;
 
+import store.Store;
+
 public class StoreOwner extends Member {
 //	private DuzoneFranchisee duzoneFranchisee;
-
-	public void showTotalSalesByTime() {
-		
-	}
-	
-	public void showTotalClientByTime() {
-		
-	}
-	
+	private Store store;
+	public void showTotalSalesByTime() {}
+	public void showTotalClientByTime() {}
 }
