@@ -2,7 +2,7 @@ package member;
 
 import java.util.List;
 
-public class Customer extends Member {
+public class Customer extends Member implements NoneAdmin {
 	private int gifticon;
 	private int stamp;
 	private List<Order> orders;

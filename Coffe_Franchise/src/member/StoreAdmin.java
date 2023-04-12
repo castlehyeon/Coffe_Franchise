@@ -1,6 +1,6 @@
 package member;
 
-public class StoreAdmin extends Member {
+public class StoreAdmin extends Member implements NoneAdmin {
 	private DuzoneCoffee duzoneCoffee;
 	
 	public void createMenu() {}
