@@ -55,6 +55,7 @@ public class Customer extends Member implements NoneAdmin {
 		if(payment instanceof Credit) {
 			System.out.println("결제 완료");
 			this.orders = new ArrayList<Order>();	// 장바구니 초기화
+			
 		} 
 		
 		// 현금결제일 때

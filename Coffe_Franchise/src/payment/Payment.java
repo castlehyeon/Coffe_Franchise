@@ -1,14 +1,30 @@
 package payment;
 
-public abstract class Payment {
-	private int PaymetAmount;
+import java.time.LocalDateTime;
 
+public abstract class Payment {
+	private int PaymentAmount;
+	private LocalDateTime PaymentTime;
+	
+	Payment(){
+		this.PaymentTime = LocalDateTime.now();
+	}
+	Payment(int paymentAmount) {
+		this.PaymentAmount = paymentAmount;
+		this.PaymentTime = LocalDateTime.now();
+	}
 	public int getPaymetAmount() {
-		return PaymetAmount;
+		return PaymentAmount;
 	}
 
-	public void setPaymetAmount(int paymetAmount) {
-		PaymetAmount = paymetAmount;
+	public void setPaymetAmount(int paymentAmount) {
+		PaymentAmount = paymentAmount;
+	}
+	public LocalDateTime getPaymentTime() {
+		return PaymentTime;
+	}
+	public void setPaymentTime(LocalDateTime paymentTime) {
+		PaymentTime = paymentTime;
 	}
 	
 }
