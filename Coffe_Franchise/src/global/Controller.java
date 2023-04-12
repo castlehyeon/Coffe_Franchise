@@ -3,34 +3,54 @@ package global;
 import java.util.Scanner;
 
 import member.Member;
+import member.MemberController;
 import store.Headquarter;
+import store.HeadquarterController;
+import store.StoreController;
 
 public class Controller {
 
     Headquarter douzoneCoffee = new Headquarter();
-
+    MemberController memberController= new MemberController();
+    HeadquarterController headquarterController = new HeadquarterController();
+    StoreController storeController = new StoreController();
     public void start() {
         Scanner sc = new Scanner(System.in);
+
+        boolean stop = false;
+
         System.out.println("안녕하세요.");
         System.out.println(douzoneCoffee.getHeadquarterName() + "입니다.");
+        do{
+            try{
 
-        System.out.println("1. 고객모드 2. 가맹점모드 3. 관리자모드 4. 회원가입");
+        System.out.println("1. 고객모드 2. 가맹점모드 3. 관리자모드 4. 회원가입 0. 종료");
         int temp = sc.nextInt();
 
-        switch (temp) {
-            case 1 :
+            switch (temp) {
+                case 1 :
+                    memberController.start();
+                    break;//고객모드
+                case 2 :
+                    storeController.start();
+                    break;//가맹점모드
+                case 3 :
+                    headquarterController.start();
+                    break;//관리자모드
+                case 4 :
+                    joinMember();break;//회원가입
+                case 0 :
+                    stop = true;
+                    break;//종료
+                default:
+            }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
 
-                break;//고객모드
-            case 2 :
 
-                break;//가맹점모드
-            case 3 :
+        }while(!stop);
 
-                break;//관리자모드
-            case 4 : joinMember();break;//회원가입
-            case 0 : break;//종료
-            default:
-        }
 
     }
 
