@@ -1,8 +1,0 @@
-package global;
-
-public class Controller {
-	
-	public void start() {
-		System.out.println("1. 고객모드 2. 가맹점모드 3. 관리자모드");
-	}
-}
