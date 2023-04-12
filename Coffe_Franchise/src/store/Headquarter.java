@@ -8,9 +8,13 @@ import menu.Menu;
 
 public class Headquarter {
 
-	//private static String headquarterName;			//본사 이름
+	private String headquarterName;			//본사 이름
 	//private static String headquarterPhoneNumber;		//본사 전화번호
-	
+
+	public String getHeadquarterName() {
+		return headquarterName;
+	}
+
 	private List<Menu> menuList;				//메뉴
 	private List<Store> storeList;				//가맹점들
 	

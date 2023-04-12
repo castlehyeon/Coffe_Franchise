@@ -1,8 +1,10 @@
+import global.Controller;
 import store.Headquarter;
 
 public class HeadquarterMain {
 
 	public static void main(String[] args) {
+
 	
 		Headquarter douzoneCoffee = new Headquarter();
 		
@@ -10,6 +12,13 @@ public class HeadquarterMain {
 		System.out.println("[관리자 모드로 로그인되었습니다.]");
 		
 		douzoneCoffee.headquarterMainMenu();	
+
+
+		Controller controller = new Controller();
+
+		controller.start();
+
+		
 	}
 
 }
