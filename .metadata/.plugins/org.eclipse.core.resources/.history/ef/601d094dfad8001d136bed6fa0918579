@@ -1,0 +1,10 @@
+package menu;
+
+public class Menu {
+
+	String menuCode;
+	String menuName;
+	int price;
+
+}
+

@@ -1,0 +1,11 @@
+import store.Headquarter;
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		Headquarter douzoneCoffee = new Headquarter();
+	 
+	}
+
+}

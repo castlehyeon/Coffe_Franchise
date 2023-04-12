@@ -1,0 +1,7 @@
+package global;
+
+import store.Headquarter;
+
+public class global {
+	 public final static Headquarter douzoneCoffee = new Headquarter();
+}

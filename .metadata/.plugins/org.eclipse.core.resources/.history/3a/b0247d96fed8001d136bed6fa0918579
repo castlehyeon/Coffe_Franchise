@@ -1,0 +1,24 @@
+package store;
+
+import java.util.List;
+
+import menu.Menu;
+
+abstract class Headquarter {
+
+	public Menu menu;				//메뉴
+	private List<Store> stores;		//가맹점들
+	
+	public Headquarter(Menu menu) {
+		this.menu = menu;
+	}
+
+	//본사는 가맹점을 추가할 수 있다.
+	private void addStore(Store store) {	
+		stores.add(store);
+	}
+	
+	
+	
+	
+}

@@ -1,0 +1,10 @@
+
+public class HeadquarterMain {
+
+	public static void main(String[] args) {
+	
+		System.out.println("[관리자 모드로 로그인되었습니다.]");
+		System.out.println("1.가맹점 관리 2.메뉴관리 3.회원관리 4.스탬프 관리");
+	}
+
+}

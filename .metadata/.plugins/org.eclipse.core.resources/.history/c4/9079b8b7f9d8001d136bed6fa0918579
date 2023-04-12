@@ -1,0 +1,12 @@
+package store;
+
+import java.util.List;
+
+import menu.Menu;
+
+abstract class Headquarter {
+
+	public Menu menu;				//메뉴
+	private List<Store> stores;		//가맹점들
+	
+}

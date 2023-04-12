@@ -1,0 +1,10 @@
+package store;
+
+import menu.Menu;
+
+abstract class Headquarter {
+
+	Menu menu;
+	
+	
+}

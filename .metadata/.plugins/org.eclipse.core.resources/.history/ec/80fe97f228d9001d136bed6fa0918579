@@ -1,0 +1,23 @@
+package global;
+
+import java.util.Scanner;
+
+import store.Headquarter;
+
+public class Controller {
+
+	public void start() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("안녕하세요. oo커피입니다.");
+		System.out.println("1. 고객모드 2. 가맹점모드 3. 관리자모드");
+		int temp = sc.nextInt();
+
+		switch (temp) {
+			case 1 : 
+			case 2 : //가맹점모드
+			case 3 : //관리자모드
+			default:
+		}
+		
+	}
+}

@@ -1,0 +1,18 @@
+package menu;
+
+public class Menu {
+
+	String menuCode;
+	String menuName;
+	int price;
+	
+	
+	public Menu(String menuCode, String menuName, int price) {
+		super();
+		this.menuCode = menuCode;
+		this.menuName = menuName;
+		this.price = price;
+	}
+	
+}
+

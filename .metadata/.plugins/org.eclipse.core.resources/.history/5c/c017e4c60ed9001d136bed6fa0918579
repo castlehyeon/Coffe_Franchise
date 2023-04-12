@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+import javax.swing.SwingUtilities;
+
+public class HeadquarterMain {
+
+	public static void main(String[] args) {
+	
+		System.out.println("[관리자 모드로 로그인되었습니다.]");
+		System.out.println("1.가맹점관리 2.메뉴관리 3.회원관리 4.스탬프관리");
+		
+		Scanner sc = new Scanner(System.in);
+		int menuNum = sc.nextInt();
+		
+		switch (menuNum) {
+			case 1 : System.out.println("가맹점관리를 선택하셨습니다.");
+			case 2 : System.out.println("메뉴관리를 선택하셨습니다.");
+			case 3 : System.out.println("회원관리를 선택하셨습니다.");
+			case 4 : System.out.println("스탬프관리를 선택하셨습니다.");
+			default :
+		}
+	
+		
+		
+		
+		
+	}
+
+}
