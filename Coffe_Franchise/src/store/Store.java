@@ -13,6 +13,7 @@ public class Store extends Headquarter{
 	private List<Sales> salesList;	//주문 정보
 	
 	public Store(String name, String address, String phoneNumber) {
+		super("");
 		this.name = name;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
