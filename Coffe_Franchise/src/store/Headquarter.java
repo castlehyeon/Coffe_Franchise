@@ -4,42 +4,38 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import member.Member;
 import menu.Menu;
 
 public class Headquarter {
 
-	//private static String headquarterName;			//본사 이름
-	//private static String headquarterPhoneNumber;		//본사 전화번호
+	private String headquarterName;			//본사 이름
+	private String headquarterPhoneNumber;		//본사 전화번호
 	
 	private List<Menu> menuList;				//메뉴
 	private List<Store> storeList;				//가맹점들
 	
 	//생성자
-	public Headquarter() {
-	//	this.headquarterName = "DuzoneCoffe";
-	//	this.headquarterPhoneNumber = "02-123-456";
-		
-		this.menuList = new ArrayList();
-		this.storeList = new ArrayList();
-		
+	public Headquarter(String headquarterName, String headquarterPhoneNumber) {
+		this.headquarterName = headquarterName;
+		this.headquarterPhoneNumber = headquarterPhoneNumber; 
+		this.menuList = new ArrayList<>();
+		this.storeList = new ArrayList<>();
 	}
 
-	
-//	public static String getHeadquarterName() {
-//		return headquarterName;
-//	}
-//
-//	public static String getHeadquarterPhoneNumber() {
-//		return headquarterPhoneNumber;
-//	}
+	public String getHeadquarterName() {
+		return headquarterName;
+	}
 
+	public String getHeadquarterPhoneNumber() {
+		return headquarterPhoneNumber;
+	}
 
 	//본사는 가맹점을 추가할 수 있다.
 	public void addStore() {	
 		Scanner sc = new Scanner(System.in);
 
 		try {
-			
 			System.out.println("가맹점 추가를 선택하셨습니다.");
 			System.out.println("등록할 가맹점의 정보를 입력해주세요.");
 			System.out.print("가맹점 이름 : ");
@@ -249,12 +245,16 @@ public class Headquarter {
 		System.out.println("스탬프관리를 선택하셨습니다.");
 		
 	}
-		
 	
+	//회원관리 멤버 추가
+	public void addMember(Member newMember){
+		System.out.println("회원가입이 완료되었습니다.");
+		
+	}
+		
 	@Override
 	public String toString() {
 		return "본사의 메뉴리스트" + menuList.toString() + "\n 가맹점 리스트" + storeList.toString();
 	}
-	
 
 }
