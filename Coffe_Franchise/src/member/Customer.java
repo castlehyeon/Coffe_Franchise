@@ -7,7 +7,13 @@ public class Customer extends Member implements NoneAdmin {
 	private int stamp;
 	private List<Order> orders;
 	
-	public void orderMenu() {}
-	public void savsStamp() {}
-	public void createGifticon() {}
+	public void orderMenu() {
+		
+	}
+	public void savsStamp() {
+		
+	}
+	public void createGifticon() {
+		
+	}
 }
