@@ -2,18 +2,17 @@ package global;
 
 import java.util.Scanner;
 
-import member.Member;
 import member.MemberController;
 import store.Headquarter;
-import store.HeadquarterController;
-import store.StoreController;
+import store.AdminController;
+import store.StoreOwnerController;
 
 public class Controller {
 
     Headquarter douzoneCoffee = new Headquarter();
     MemberController memberController= new MemberController();
-    HeadquarterController headquarterController = new HeadquarterController();
-    StoreController storeController = new StoreController();
+    AdminController adminController = new AdminController();
+    StoreOwnerController storeOwnerController = new StoreOwnerController();
     public void start() {
         Scanner sc = new Scanner(System.in);
 
@@ -32,10 +31,10 @@ public class Controller {
                     memberController.start();
                     break;//고객모드
                 case 2 :
-                    storeController.start();
+                    storeOwnerController.start();
                     break;//가맹점모드
                 case 3 :
-                    headquarterController.start();
+                    adminController.start();
                     break;//관리자모드
                 case 4 :
                     joinMember();break;//회원가입

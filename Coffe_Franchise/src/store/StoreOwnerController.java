@@ -1,6 +1,6 @@
 package store;
 //가맹점주
-public class StoreController {
+public class StoreOwnerController {
     public void start() {
 
     }
