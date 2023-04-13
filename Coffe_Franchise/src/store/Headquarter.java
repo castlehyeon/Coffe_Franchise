@@ -62,5 +62,39 @@ public class Headquarter {
 		return "본사의 메뉴리스트" + menuList.toString() + "\n 가맹점 리스트" + storeList.toString();
 	}
 
+<<<<<<< HEAD
+	//아이디 중복검사
+	public boolean duplicateId(String id) {
+		boolean chkIdRun = false;
+		List<Member> memberList = (List<Member>) headquarterInfoMap.get("members");
+		for(Member member : memberList) {
+			if(id.equals(member.getID())) {
+				chkIdRun = true;
+				System.out.println("중복된 아이디가 있습니다. 다시 입력해주세요.");
+			}
+		}
+		return chkIdRun;
+	}
+	
+	//로그인
+	public Member checkLogin(String id, String password) {
+		Member loginMember = null;
+		List<Member> memberList = (List<Member>) headquarterInfoMap.get("members");
+		for(Member member : memberList) {
+			if(id.equals(member.getID())) {
+				if(password.equals(member.getPassword())) {
+					loginMember = member;
+				}else {
+					System.out.println("비밀번호를 다시 확인해주세요.");
+				}
+			}else {
+				System.out.println("아이디를 다시 확인해주세요.");
+			}
+		}
+		
+		return loginMember;
+	}
+=======
+>>>>>>> 62203aa911804b9723d42d942bcafe66a52e3e1f
 
 }

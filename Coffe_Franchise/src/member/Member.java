@@ -12,6 +12,7 @@ public abstract class Member {
 		this.password = password;
 		this.phoneNumber = phoneNumber;
 	}
+	
 	public String getID() {
 		return ID;
 	}
@@ -29,7 +30,5 @@ public abstract class Member {
 	}
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
-	} 
-	
-	
+	}
 }
