@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import global.Controller;
 import menu.Menu;
 import store.Headquarter;
 import store.HeadquarterInfoManage;
@@ -17,6 +18,12 @@ public class AdminController {
     //어디서든지 하나의 Headquarter객체만을 사용할 수 있다.
     Headquarter headquarter = new Headquarter();
     HeadquarterInfoManage headquarterInfoManage = new HeadquarterInfoManage();
+    Controller controller;
+
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
+
     public void start() {
         this.headquarterMainMenu();
     }
@@ -33,7 +40,7 @@ public class AdminController {
             case 2 : manageMenu();			break;//메뉴관리
             case 3 : manageMembers();		break;//회원관리
             case 4 : manageStamps();		break;//스탬프관리
-            case 0 : break;
+            case 0 : this.controller.start();   break;
             default : System.out.println("다시 선택해주세용"); headquarterMainMenu();
         }
     }
@@ -176,6 +183,7 @@ public class AdminController {
 
             Store addStore = new Store(name, address, phoneNumber);
             headquarter.getStoreList().add(addStore);
+            headquarterInfoManage.createStore(addStore);
 
             System.out.println(addStore.toString());
             System.out.println("을 추가했습니다.");
@@ -221,7 +229,7 @@ public class AdminController {
     //가맹점들 출력하기
     public void showStoreList() {
         System.out.println("=========가맹점 리스트===========");
-        for(Store store : headquarter.getStoreList()) {
+        for(Store store : (List<Store>)headquarterInfoManage.getStores()) {
             System.out.println(store.getName());
         }
         System.out.println("============================");

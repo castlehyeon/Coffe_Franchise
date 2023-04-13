@@ -1,6 +1,7 @@
 package member;
 
 public class StoreOwner extends Member {
+
 //	private DuzoneFranchisee duzoneFranchisee;
 	private String storeCode;
 	

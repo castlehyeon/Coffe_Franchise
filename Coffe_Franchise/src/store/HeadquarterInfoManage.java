@@ -1,5 +1,6 @@
 package store;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,12 +8,20 @@ import java.util.Map;
 
 import member.Customer;
 import member.Member;
+import member.StoreAdmin;
 import menu.Menu;
 
-public class HeadquarterInfoManage {
+public class HeadquarterInfoManage implements Serializable{
     // Flyweight 패턴을 적용하기 위해 객체 간 공유할 정보를 담는 Map
     private static Map<String, List<?>> headquarterInfoMap = new HashMap<>();
 
+    public static void setHeadquarterInfoMap(Map<String, List<?>> headquarterInfoMap) {
+        HeadquarterInfoManage.headquarterInfoMap = headquarterInfoMap;
+    }
+
+    public static Map<String, List<?>> getHeadquarterInfoMap() {
+        return headquarterInfoMap;
+    }
 
     //리스트를 뱉는 메서드
     public List<?> getMenus() {
@@ -64,8 +73,17 @@ public class HeadquarterInfoManage {
         menuList.add(menu);
         headquarterInfoMap.put("menus", menuList);
     }
-    
 
+    public List<?> getStoreAdmins() {
+        if (headquarterInfoMap.containsKey("storeAdmins")) {
+            return headquarterInfoMap.get("storeAdmins");
+        }
+
+        List<?> storeAdmins = createStoreAdmins();
+        headquarterInfoMap.put("storeAdmins", storeAdmins);
+        return storeAdmins;
+
+    }
     public List<?> getMembers() {
         // "members" 키로 등록된 내부 객체가 이미 존재하면 해당 객체를 반환
         if (headquarterInfoMap.containsKey("members")) {
@@ -108,8 +126,26 @@ public class HeadquarterInfoManage {
             }
         }
     }
-    
-    
+
+    public void createStoreAdmin(String id, String pw, String phoneNum) {
+        if(!headquarterInfoMap.containsKey("storeAdmins")){
+            createStoreAdmins();
+        }
+        List<StoreAdmin> storeAdminList = (List<StoreAdmin>) headquarterInfoMap.get("storeAdmins");
+        StoreAdmin storeAdmin = new StoreAdmin(id, pw, phoneNum);
+        storeAdminList.add(storeAdmin);
+        headquarterInfoMap.put("storeAdmins", storeAdminList);
+    }
+
+    public void createStore(Store store) {
+        if(!headquarterInfoMap.containsKey("stores")) {
+            createStores();
+        }
+        List<Store> storeList = (List<Store>) headquarterInfoMap.get("stores");
+        Store createStore = store;
+        storeList.add(createStore);
+        headquarterInfoMap.put("stores", storeList);
+    }
     public void createMember(String id, String password, String phoneNumber) {
        if(!headquarterInfoMap.containsKey("members")) {
           createMembers();
@@ -153,13 +189,65 @@ public class HeadquarterInfoManage {
         return menuList;
     }
     private List<?> createMembers() {
-       List<Menu> memberList = new ArrayList<>();
+       List<Member> memberList = new ArrayList<>();
         return memberList;
         // 멤버 객체 생성 로직
     }
     private List<?> createStores() {
-       List<Menu> storeList = new ArrayList<>();
+       List<Store> storeList = new ArrayList<>();
         return storeList;
         // 상점 객체 생성 로직
+    }
+    private List<?> createStoreAdmins() {
+        List<StoreAdmin> storeAdminList = new ArrayList<>();
+        return storeAdminList;
+        // 상점 객체 생성 로직
+    }
+    public void save() {
+        FileOutputStream fos = null;
+        ObjectOutputStream out = null;
+        try{
+            fos = new FileOutputStream("headquarterInfo.txt");
+            out = new ObjectOutputStream(fos);
+
+            out.writeObject(getHeadquarterInfoMap());
+
+
+        }catch(Exception e){
+            System.out.println("에러발생!!!");
+            e.printStackTrace();
+        }finally {
+            try {
+                out.close();
+                fos.close();
+            } catch (IOException e2) {
+                e2.printStackTrace();
+            }
+        }
+        System.out.println("저장되었습니다.");
+        System.out.println("프로그램을 종료합니다.");
+        System.out.println();
+
+
+    }
+
+    public static HashMap load() { // 읽어올때
+
+        File file = new File("headquarterInfo.txt");
+        HashMap info = null;
+        try{
+            FileInputStream fis = new FileInputStream(file);
+            ObjectInputStream oos = new ObjectInputStream(fis);
+
+            info = (HashMap)oos.readObject();
+
+            oos.close();
+            fis.close();
+
+        }catch(Exception e){
+            System.out.println("데이터가 존재하지 않습니다.");
+        }
+
+        return info;
     }
 }
