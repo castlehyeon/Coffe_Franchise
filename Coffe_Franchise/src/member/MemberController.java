@@ -79,8 +79,4 @@ public class MemberController {
     	}
     }
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 62203aa911804b9723d42d942bcafe66a52e3e1f

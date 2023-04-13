@@ -17,12 +17,12 @@ public class HeadquarterInfoManage {
 
     //리스트를 뱉는 메서드
     public List<?> getMenus() {
-        if (headquarterInfoMap.containsKey("menu")) {
-            return headquarterInfoMap.get("menu");
+        if (headquarterInfoMap.containsKey("menus")) {
+            return headquarterInfoMap.get("menus");
         }
         //리스트가 생성되어있지 않다면 생성해서 반환.
         List<?> menus = createMenus();
-        headquarterInfoMap.put("menu", menus);
+        headquarterInfoMap.put("menus", menus);
         return menus;
     }
 
@@ -30,8 +30,8 @@ public class HeadquarterInfoManage {
     public Menu getMenu(String name){
         Menu findMenu = null;
         // "menu" 키로 등록된 내부 객체가 이미 존재하면 해당 객체를 반환
-        if (headquarterInfoMap.containsKey("menu")) {
-            List<Menu> menuList = (List<Menu>) headquarterInfoMap.get("menu");
+        if (headquarterInfoMap.containsKey("menus")) {
+            List<Menu> menuList = (List<Menu>) headquarterInfoMap.get("menus");
             //value값 중 동일한 이름의 메뉴가 있는지 확인
             for(Menu m : menuList){
                 if(m.getMenuName().equals(name)) {
@@ -44,7 +44,7 @@ public class HeadquarterInfoManage {
     }
 
     public void createMenu(String name, int price) {
-        List<Menu> menuList = (List<Menu>) headquarterInfoMap.get("menu");
+        List<Menu> menuList = (List<Menu>) headquarterInfoMap.get("menus");
         Menu menu = new Menu(name, price);
         menuList.add(menu);
         headquarterInfoMap.put("menu", menuList);
@@ -67,8 +67,8 @@ public class HeadquarterInfoManage {
     public Member getMember(String id){
     	Member findMember = null;
         // "menu" 키로 등록된 내부 객체가 이미 존재하면 해당 객체를 반환
-        if (headquarterInfoMap.containsKey("member")) {
-            List<Member> memberList = (List<Member>) headquarterInfoMap.get("member");
+        if (headquarterInfoMap.containsKey("members")) {
+            List<Member> memberList = (List<Member>) headquarterInfoMap.get("members");
             //value값 중 동일한 이름의 메뉴가 있는지 확인
             for(Member m : memberList){
                 if(m.getID().equals(id)) {
@@ -81,10 +81,13 @@ public class HeadquarterInfoManage {
     }
     
     public void createMember(String id, String password, String phoneNumber) {
-        List<Member> memberList = (List<Member>) headquarterInfoMap.get("member");
+    	if(headquarterInfoMap.containsKey("members")) {
+        	createMembers();
+        }
+    	List<Member>memberList = (List<Member>) headquarterInfoMap.get("members");
         Member member = new Customer(id,password,phoneNumber);
         memberList.add(member);
-        headquarterInfoMap.put("member", memberList);
+        headquarterInfoMap.put("members", memberList);
     }
 	
     public List<?> getStores() {

@@ -8,6 +8,7 @@ import menu.Menu;
 
 public class Headquarter {
 
+	HeadquarterInfoManage hm = new HeadquarterInfoManage();
 	private String headquarterName;			//본사 이름
 	//private static String headquarterPhoneNumber;		//본사 전화번호
 
@@ -39,7 +40,7 @@ public class Headquarter {
 		HeadquarterInfoManage hm = new HeadquarterInfoManage();
 		this.menuList = (List<Menu>) hm.getMenus();
 //		this.storeList = (List<Store>) hm.getStores();
-//		this.memberList = (List<Member>) hm.getMembers();
+		this.memberList = (List<Member>) hm.getMembers();
 
 	}
 
@@ -62,11 +63,10 @@ public class Headquarter {
 		return "본사의 메뉴리스트" + menuList.toString() + "\n 가맹점 리스트" + storeList.toString();
 	}
 
-<<<<<<< HEAD
 	//아이디 중복검사
 	public boolean duplicateId(String id) {
 		boolean chkIdRun = false;
-		List<Member> memberList = (List<Member>) headquarterInfoMap.get("members");
+		List<Member> memberList = (List<Member>) hm.getMembers();
 		for(Member member : memberList) {
 			if(id.equals(member.getID())) {
 				chkIdRun = true;
@@ -79,7 +79,7 @@ public class Headquarter {
 	//로그인
 	public Member checkLogin(String id, String password) {
 		Member loginMember = null;
-		List<Member> memberList = (List<Member>) headquarterInfoMap.get("members");
+		List<Member> memberList = (List<Member>) hm.getMembers();
 		for(Member member : memberList) {
 			if(id.equals(member.getID())) {
 				if(password.equals(member.getPassword())) {
@@ -94,7 +94,5 @@ public class Headquarter {
 		
 		return loginMember;
 	}
-=======
->>>>>>> 62203aa911804b9723d42d942bcafe66a52e3e1f
 
 }

@@ -16,10 +16,10 @@ import store.HeadquarterInfoManage;
 public class Controller {
 
     Headquarter douzoneCoffee = new Headquarter();
-    HeadquarterInfoManage headquarterInfoManage = new HeadquarterInfoManage();
     MemberController memberController= new MemberController();
     AdminController adminController = new AdminController();
     StoreOwnerController storeOwnerController = new StoreOwnerController();
+    HeadquarterInfoManage headquarterInfoManage = new HeadquarterInfoManage();
     
     public void start() {
     	Scanner sc = new Scanner(System.in);
