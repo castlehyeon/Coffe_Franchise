@@ -259,6 +259,32 @@ public class Headquarter {
 	public String toString() {
 		return "본사의 메뉴리스트" + menuList.toString() + "\n 가맹점 리스트" + storeList.toString();
 	}
+
+
+	public List<Menu> getMenuList() {
+		return menuList;
+	}
+
+
+	public void setMenuList(List<Menu> menuList) {
+		this.menuList = menuList;
+	}
+
+
+	public List<Store> getStoreList() {
+		return storeList;
+	}
+
+
+	public void setStoreList(List<Store> storeList) {
+		this.storeList = storeList;
+	}
+
+
+	public void setHeadquarterName(String headquarterName) {
+		this.headquarterName = headquarterName;
+	}
+	
 	
 
 }
