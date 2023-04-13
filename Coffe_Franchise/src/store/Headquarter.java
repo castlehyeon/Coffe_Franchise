@@ -1,12 +1,9 @@
 package store;
 
+import java.util.List;
+
 import member.Member;
 import menu.Menu;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 public class Headquarter {
@@ -64,6 +61,6 @@ public class Headquarter {
 	public String toString() {
 		return "본사의 메뉴리스트" + menuList.toString() + "\n 가맹점 리스트" + storeList.toString();
 	}
-	
+
 
 }
