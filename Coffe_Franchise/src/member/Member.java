@@ -1,6 +1,8 @@
 package member;
 
-public abstract class Member {
+import java.io.Serializable;
+
+public abstract class Member implements Serializable {
 	private String ID;
 	private String password;
 	private String phoneNumber;

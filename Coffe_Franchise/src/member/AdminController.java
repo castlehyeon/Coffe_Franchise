@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import global.Controller;
 import menu.Menu;
 import store.Headquarter;
 import store.HeadquarterInfoManage;
@@ -18,6 +19,12 @@ public class AdminController {
     Headquarter headquarter = new Headquarter();
     HeadquarterInfoManage headquarterInfoManage = new HeadquarterInfoManage();
     
+    Controller controller;
+
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
+
     public void start() {
         this.headquarterMainMenu();
     }
@@ -204,6 +211,7 @@ public class AdminController {
 
             Store addStore = new Store(name, address, phoneNumber);
             headquarter.getStoreList().add(addStore);
+            headquarterInfoManage.createStore(addStore);
 
             System.out.print("가맹점 ");
             System.out.print(addStore.toString());
@@ -244,19 +252,8 @@ public class AdminController {
         }catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
-    //메뉴번호로 메뉴 가져오기
-    private Menu selectMenu(int menuCode) {
-        Menu menu = new Menu(null, menuCode);
-        for(Menu searchMenu : headquarter.getMenuList()) {
-            if (menuCode == menu.getMenuCode()) {
-                menu = searchMenu;
-            }
-        }
-        return menu;
-    }
 
     //메누생성
     public void createMenu(){

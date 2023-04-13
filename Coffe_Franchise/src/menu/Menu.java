@@ -1,8 +1,9 @@
 package menu;
 
 import store.Headquarter;
+import java.io.Serializable;
 
-public class Menu {
+public class Menu implements Serializable {
 
 	Headquarter headquarter =  new Headquarter();
 	private int menuCode;

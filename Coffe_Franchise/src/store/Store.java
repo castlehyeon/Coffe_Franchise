@@ -1,9 +1,10 @@
 package store;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Store {
+public class Store implements Serializable {
 
 	private int storeCode;		//가게코드
 	private String name;		//지점이름

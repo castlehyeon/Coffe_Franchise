@@ -1,6 +1,9 @@
 package global;
 
+import java.io.*;
+import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import member.AdminController;
@@ -13,24 +16,31 @@ import member.StoreOwnerController;
 import store.Headquarter;
 import store.HeadquarterInfoManage;
 
-public class Controller {
+public class Controller{
 
     Headquarter douzoneCoffee = new Headquarter();
     HeadquarterInfoManage headquarterInfoManage = new HeadquarterInfoManage();
     MemberController memberController= new MemberController();
     AdminController adminController = new AdminController();
     StoreOwnerController storeOwnerController = new StoreOwnerController();
-    
+
     public void start() {
     	Scanner sc = new Scanner(System.in);
     	boolean run = true;
-    	
+		HashMap info = HeadquarterInfoManage.load();
+		if(info!=null) {
+			headquarterInfoManage.setHeadquarterInfoMap(info);
+		}
+		headquarterInfoManage.createStoreAdmin("abc","aaaaaa1!","000-0000-0000");
+		System.out.println("***********이디야에 오신 것을 환영합니다.***********");
 		System.out.println("1. 로그인하기 2. 회원가입하기 3. 종료하기 ");
 		int temp = sc.nextInt();
 		switch (temp) {
-			case 1 : this.login();					break;	//로그인하기 
-			case 2 : this.joinMember();	start(); 	break;	//회원가입하기
-			case 3 : break;	//종료
+			case 1 : this.login();		break;	//로그인하기 
+			case 2 : this.joinMember();	start(); break;	//회원가입하기
+			case 3 :
+				headquarterInfoManage.save();
+				break;	//종료
 			default: System.out.println("유효한 값을 입력해주세요.");start();
 		}
     }
@@ -49,9 +59,11 @@ public class Controller {
 	    	if(loginMember != null) {
 		    	if (loginMember instanceof Customer) {
 		    		memberController.setCustomer((Customer)loginMember);
+					memberController.start();
 		    	}else if(loginMember instanceof StoreOwner) {
 		    		storeOwnerController.start();
 		    	}else if(loginMember instanceof StoreAdmin){
+					adminController.setController(this);
 		    		adminController.start();
 		    	}else{
 		    		start();
@@ -97,5 +109,5 @@ public class Controller {
         
         headquarterInfoManage.createMember(id,pw,phoneNum);
     }
-    
+
 }
