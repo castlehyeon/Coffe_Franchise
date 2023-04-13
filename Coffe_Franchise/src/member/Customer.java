@@ -57,11 +57,7 @@ public class Customer extends Member implements NoneAdmin {
 	}
 	
 	// 결제 진행
-	public Sales payProducts(Payment payment) {
-		int totalPrice = 0;
-		for(Order order : orders) {
-			totalPrice += order.getMenu().getMenuPrice();
-		}
+	public Sales payProducts(Payment payment, int totalPrice) {
 		payment.setPaymetAmount(totalPrice);
 		System.out.printf("총 결제금액은 %d원 입니다.\n", totalPrice);
 		Sales sales = new Sales(this.store, this.orders, totalPrice, this);	// 주문내역 생성
@@ -70,35 +66,22 @@ public class Customer extends Member implements NoneAdmin {
 		if(payment instanceof Credit) {
 			System.out.println("결제 완료");
 			sales.setPayment(payment);
+			this.saveStamp();
 		} 
 		
 		// 현금결제일 때
 		else if(payment instanceof Cash) {
-			// 투입한 돈보다 결제금액이 작을 때
-			if(payment.getPaymetAmount() <= ((Cash) payment).getInputMoney()) {
-				System.out.println("결제 완료");
-				System.out.printf("거스름돈은 %d원 입니다.", ((Cash)payment).returnChange());
-				sales.setPayment(payment);
-			} else {
-				System.out.println("돈이 부족합니다.");
-			}
-		} 
+			System.out.println("결제 완료");
+			System.out.printf("거스름돈은 %d원 입니다.", ((Cash)payment).returnChange());
+			sales.setPayment(payment);
+			this.saveStamp();
+		}
 		
 		// 기프티콘 결제일 때
 		else if(payment instanceof Gifticon) {
-			int menuCount = 0;
-			for(Order order: orders) {
-				menuCount += order.getMenuCount();
-			}
-			if(this.gifticon>=menuCount) {
-				System.out.println("결제 완료");
-				this.gifticon -= menuCount;
-				System.out.printf("현재 잔여 기프티콘은 %d개 입니다.\n", gifticon);
-				sales.setPayment(payment);
-			} else {
-				System.out.println("잔여 기프티콘이 없습니다.");
-			}
-		
+			System.out.println("결제 완료");
+			System.out.printf("현재 잔여 기프티콘은 %d개 입니다.\n", gifticon);
+			sales.setPayment(payment);
 		}
 		
 		return sales;
@@ -111,7 +94,25 @@ public class Customer extends Member implements NoneAdmin {
 	public void setStore(Store store) {
 		this.store = store;
 	}
-
+	public List<Order> getOrders() {
+		return orders;
+	}
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+	public int getGifticon() {
+		return gifticon;
+	}
+	public void setGifticon(int gifticon) {
+		this.gifticon = gifticon;
+	}
+	public int getStamp() {
+		return stamp;
+	}
+	public void setStamp(int stamp) {
+		this.stamp = stamp;
+	}
+	
 	
 	
 	

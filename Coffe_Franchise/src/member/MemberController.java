@@ -84,29 +84,74 @@ public class MemberController {
     
     
     //결제한다.
-    public void purchase() {
-    	System.out.println("결제 방법을 선택하십시오");
-    	System.out.println("1.카드	2.현금	3.기프티콘");
-    	int select = sc.nextInt();
-    	List<Sales> sales = store.getSalesList();
-		switch (select) {
-		case 1:
-			sales.add(customer.payProducts(new Credit()));
-			store.setSalesList(sales);
-			break;
-		case 2:
-			sales.add(customer.payProducts(new Cash()));
-			store.setSalesList(sales);
-			break;
-		case 3:
-			sales.add(customer.payProducts(new Gifticon()));
-			store.setSalesList(sales);
-			break;
-		default:
-			System.out.println("올바른 결제 방법을 선택하십시오");
+	public void purchase() {
+		try {
+			System.out.println("결제 방법을 선택하십시오");
+			System.out.println("1.카드	2.현금	3.기프티콘");
+			int select = sc.nextInt();
+			List<Sales> sales = store.getSalesList();
+			int totalPrice = 0;
+			for(Order order: this.customer.getOrders()) {
+				totalPrice += order.getMenu().getMenuPrice() * order.getMenuCount();
+			}
+			switch (select) {
+			case 1:
+				sales.add(customer.payProducts(new Credit(), totalPrice));
+				store.setSalesList(sales);
+				break;
+			case 2:
+				System.out.println("현금을 투입해 주십시오");
+				int inputMoney = sc.nextInt();
+				if (totalPrice >= inputMoney) {
+					sales.add(customer.payProducts(new Cash(inputMoney), totalPrice));
+					store.setSalesList(sales);
+				} else {
+					System.out.println("돈이 부족합니다.");
+				}
+				break;
+			case 3:
+				int menuCount = 0;
+				for (Order order : this.customer.getOrders()) {
+					menuCount += order.getMenuCount();
+				}
+
+				if (this.customer.getGifticon() >= menuCount) {
+					sales.add(customer.payProducts(new Gifticon(), totalPrice));
+					this.customer.setGifticon(this.customer.getGifticon() - menuCount);
+					store.setSalesList(sales);
+				} else {
+					System.out.println("기프티콘이 부족합니다.");
+				}
+				break;
+			default:
+				System.out.println("올바른 결제 방법을 선택하십시오");
+				this.purchase();
+			}
+		} catch (Exception e) {
 			this.purchase();
 		}
-    }
+	}
+
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+
+	public Store getStore() {
+		return store;
+	}
+
+
+	public void setStore(Store store) {
+		this.store = store;
+	}
+    
     
 
 }
