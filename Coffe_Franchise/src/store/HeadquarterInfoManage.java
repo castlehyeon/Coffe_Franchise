@@ -3,12 +3,14 @@ package store;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import member.Customer;
 import member.Member;
 import member.StoreAdmin;
+import member.StoreOwner;
 import menu.Menu;
 
 public class HeadquarterInfoManage implements Serializable{
@@ -180,6 +182,19 @@ public class HeadquarterInfoManage implements Serializable{
         }
     }
 
+    public Store setMyStore(StoreOwner storeOwner) {
+    	Store mystore = null;
+    	if (headquarterInfoMap.containsKey("stores")) {
+            List<Store> storeList = (List<Store>) headquarterInfoMap.get("stores");
+            for(Store store : storeList) {
+            	if(storeOwner.getStoreCode()==store.getStoreCode()){
+            		mystore = store;
+            	}
+            }
+        }
+    	return mystore;
+    }
+    
     // 실제로 객체를 생성하는 메서드, public으로 선언해도 될까
     // 이 메서드들은 Flyweight 패턴에서 호출
 
@@ -250,4 +265,6 @@ public class HeadquarterInfoManage implements Serializable{
 
         return info;
     }
+    
+    
 }

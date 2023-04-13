@@ -59,12 +59,11 @@ public class MemberController {
 			Menu menu = head.getMenuList().get(index);
 			System.out.println("주문 수량을 입력해 주세요.");
 			int menuCount = sc.nextInt();
-//			sc.nextLine();
 			customer.orderMenu(menuCount, menu);
 			boolean stop = false;
 			while (stop) {
 				System.out.println("계속 하시겠습니까? (y/n)");
-				String addMore = sc.next();
+				String addMore = sc.nextLine();
 				if (addMore.equals("y")) {
 					stop = true;
 					this.addToCart();

@@ -51,9 +51,9 @@ public class Controller{
     	try{
 	    	System.out.println("*로그인*");
 	    	System.out.print("아이디 입력 : ");
-	    	String id = sc.next();
+	    	String id = sc.nextLine();
 	    	System.out.print("비밀번호 입력 : ");
-	    	String pw = sc.next();
+	    	String pw = sc.nextLine();
 	    	
 	    	Member loginMember = douzoneCoffee.checkLogin(id,pw);
 	    	if(loginMember != null) {
@@ -61,6 +61,7 @@ public class Controller{
 		    		memberController.setCustomer((Customer)loginMember);
 					memberController.start();
 		    	}else if(loginMember instanceof StoreOwner) {
+		    		storeOwnerController.setStoreOwner((StoreOwner)loginMember);
 		    		storeOwnerController.start();
 		    	}else if(loginMember instanceof StoreAdmin){
 					adminController.setController(this);
@@ -89,20 +90,20 @@ public class Controller{
         
         while(chRun) {
         	System.out.print("아이디 입력 : ");
-        	id = sc.next();
+        	id = sc.nextLine();
         	chRun = douzoneCoffee.duplicateId(id);	//ID 중복검사
         }chRun = true;
         
         while(chRun) {
 	        System.out.print("비밀번호 입력 (영문과 특수문자 숫자를 포함하며 8자 이상 입력해주세요): ");
-	        pw = sc.next();
+	        pw = sc.nextLine();
 	        chRun = !(Pattern.matches("^(?=.*[a-zA-Z])(?=.*\\d)(?=.*\\W).{8,20}$", pw));
 	        if(chRun == true) {System.out.println("올바른 형식을 입력해주세요.");}
         }chRun = true;
         
         while(chRun) {
         	System.out.print("핸드폰번호 입력 : ");
-        	phoneNum = sc.next();
+        	phoneNum = sc.nextLine();
         	chRun = !(Pattern.matches("^(01\\d{1}|02|0505|0502|0506|0\\d{1,2})-?(\\d{3,4})-?(\\d{4})", phoneNum));	
         	if(chRun == true) {System.out.println("올바른 형식을 입력해주세요.");}
         }
