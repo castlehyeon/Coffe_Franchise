@@ -28,7 +28,7 @@ public class Controller {
 
             switch (temp) {
                 case 1 :
-                    memberController.selectStore();
+                    memberController.start();
                     break;//고객모드
                 case 2 :
                     storeOwnerController.start();
