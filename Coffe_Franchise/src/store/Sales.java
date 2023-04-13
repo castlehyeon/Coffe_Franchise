@@ -4,7 +4,6 @@ import java.util.List;
 
 import member.Member;
 import member.Order;
-import menu.Menu;
 import payment.Payment;
 
 public class Sales {

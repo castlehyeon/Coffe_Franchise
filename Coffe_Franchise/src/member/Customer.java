@@ -16,8 +16,10 @@ public class Customer extends Member implements NoneAdmin {
 	private List<Order> orders;	// 장바구니
 	
 	// 생성자
-	Customer(String ID, String password, String memberType, String phoneNumber) {
-		super(ID, password, memberType, phoneNumber);
+	public Customer(String ID, String password, String phoneNumber) {
+		super.ID = ID;
+		super.password = password;
+		super.phoneNumber = phoneNumber;
 		this.gifticon = 0;
 		this.stamp = 0;
 		this.orders = new ArrayList<Order>();
