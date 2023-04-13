@@ -18,6 +18,7 @@ public class AdminController {
     //어디서든지 하나의 Headquarter객체만을 사용할 수 있다.
     Headquarter headquarter = new Headquarter();
     HeadquarterInfoManage headquarterInfoManage = new HeadquarterInfoManage();
+    
     Controller controller;
 
     public void setController(Controller controller) {
@@ -30,7 +31,7 @@ public class AdminController {
 
     //메인메뉴
     public void headquarterMainMenu() {
-        System.out.println("1.가맹점관리 2.메뉴관리 3.회원관리 4.스탬프관리 0.종료");
+        System.out.println("1.가맹점관리 2.메뉴관리 3.회원관리 0.종료");
 
         Scanner sc = new Scanner(System.in);
         int menuNum = sc.nextInt();
@@ -39,9 +40,8 @@ public class AdminController {
             case 1 : manageStores();		break;//가맹점관리
             case 2 : manageMenu();			break;//메뉴관리
             case 3 : manageMembers();		break;//회원관리
-            case 4 : manageStamps();		break;//스탬프관리
-            case 0 : this.controller.start();   break;
-            default : System.out.println("다시 선택해주세용"); headquarterMainMenu();
+            case 0 : break;
+            default : System.out.println("유효한 값을 입력해주세요."); headquarterMainMenu();
         }
     }
 
@@ -61,7 +61,7 @@ public class AdminController {
             case 3 : storeSalseList();	headquarterMainMenu();break;//가맹점별 매출조회
             case 4 : showStoreList(); 	headquarterMainMenu();break;//가맹점 리스트조회
             case 0 : break;
-            default : System.out.println("다시 선택해주세용"); manageStores();
+            default : System.out.println("유효한 값을 입력해주세요."); manageStores();
         }
 
 
@@ -72,24 +72,59 @@ public class AdminController {
     //메뉴관리 메뉴 선택
     public void manageMenu() {
         System.out.println("메뉴관리를 선택하셨습니다.");
-        System.out.println("1.메뉴생성 2.메뉴삭제 3.메뉴별 매출조회");
+        showMenuList();
+        System.out.println("1.메뉴생성 2.메뉴삭제 3.메뉴 수정");
 
         Scanner sc = new Scanner(System.in);
         int menuNum = sc.nextInt();
 
         switch (menuNum) {
-            case 1 : createMenu();		headquarterMainMenu(); break;//메뉴 생성
-            case 2 : deleteMenu();		headquarterMainMenu(); break;//메뉴 삭제
-            case 3 : System.out.println("메뉴별 매출조회 구현중..."); headquarterMainMenu(); break;//menuSalseList();	break; 메뉴별 매출조회
+            case 1 : createMenu();		headquarterMainMenu(); break;	//메뉴 생성
+            case 2 : deleteMenu();		headquarterMainMenu(); break;	//메뉴 삭제
+            case 3 : updateMenu();		headquarterMainMenu(); break;	//메뉴 수정
             case 0 : break;
-            default : System.out.println("다시 선택해주세용"); manageStores();
+            default : System.out.println("유효한 값을 입력해주세요."); manageStores();
         }
-
 
         System.out.println();
 
     }
 
+    //메뉴수정
+    public void updateMenu() {
+    	Scanner sc = new Scanner(System.in);
+    	int temp = 0;
+    	
+    	System.out.println("메뉴수정을 선택하셨습니다.");
+    	System.out.println("현재 메뉴");
+    	for(Menu menu : headquarter.getMenuList()) {
+    		System.out.println(menu.toString());
+    	}
+    	
+    	System.out.println("변경할 메뉴의 코드를 입력해주세요.");
+    	int menuCode = sc.nextInt();
+    	Menu menu = headquarterInfoManage.getMenu(menuCode);
+        
+        System.out.println("변경할 항목을 선택해주세요.");
+        System.out.println("1. 메뉴이름 2. 메뉴가격");
+        temp = sc.nextInt();
+        
+        switch (temp) {
+			case 1: System.out.printf("메뉴이름 입력 : ");
+					String menuName = sc.next();
+					menu.setMenuName(menuName);
+					headquarterInfoManage.setMenu(menu);
+					break;
+			case 2: System.out.printf("메뉴가격 입력 : ");
+					int menuPrice = sc.nextInt();
+					menu.setMenuPrice(menuPrice);
+					headquarterInfoManage.setMenu(menu);
+					break;
+			default:
+		}
+    	
+    }
+    
     //회원관리 메뉴 선택
     public void manageMembers() {
     	System.out.println("회원관리를 선택하셨습니다.");
@@ -99,8 +134,7 @@ public class AdminController {
         int menuNum = sc.nextInt();
 
         switch (menuNum) {
-            case 1 : headquarter.getMemberList().toString();
-            		headquarterMainMenu(); break;
+            case 1 : showMemberList();	headquarterMainMenu(); 	break;	//회원리스트
             case 2 : transformMember();	headquarterMainMenu();  break;	//가앰점주 등록하기
             case 3 : rankSalesMembers(); headquarterMainMenu(); break;	//회원별 매출순위
             case 0 : break;
@@ -160,12 +194,6 @@ public class AdminController {
     		}
     	}
     }
-    
-    //스탬프관리 메뉴 선택
-    public void manageStamps() {
-        System.out.println("스탬프관리를 선택하셨습니다.");
-
-    }
 
     public void addStore() {
         Scanner sc = new Scanner(System.in);
@@ -185,7 +213,8 @@ public class AdminController {
             headquarter.getStoreList().add(addStore);
             headquarterInfoManage.createStore(addStore);
 
-            System.out.println(addStore.toString());
+            System.out.print("가맹점 ");
+            System.out.print(addStore.toString());
             System.out.println("을 추가했습니다.");
 
         }catch (Exception e) {
@@ -223,56 +252,22 @@ public class AdminController {
         }catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
-    //가맹점들 출력하기
-    public void showStoreList() {
-        System.out.println("=========가맹점 리스트===========");
-        for(Store store : (List<Store>)headquarterInfoManage.getStores()) {
-            System.out.println(store.getName());
-        }
-        System.out.println("============================");
-    }
-
-
-
-    //메뉴번호로 메뉴 가져오기
-    private Menu selectMenu(int menuCode) {
-        Menu menu = new Menu(null, menuCode);
-        for(Menu searchMenu : headquarter.getMenuList()) {
-            if (menuCode == menu.getMenuCode()) {
-                menu = searchMenu;
-            }
-        }
-        return menu;
-    }
 
     //메누생성
     public void createMenu(){
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("메뉴 생성을 선택하셨습니다.");
+        System.out.print("메뉴 생성을 선택하셨습니다.");
         System.out.println("등록할 메뉴의 정보를 입력해주세요.");
         System.out.print("메뉴이름 : ");
         String name = sc.next();
         System.out.print("메뉴금액: ");
         int price = sc.nextInt();
-        Menu addMenu = headquarterInfoManage.getMenu(name);
-        //유효성 검사
-        if(addMenu == null) {
-            try {
-                addMenu = new Menu(name, price);
-                headquarterInfoManage.createMenu(name, price);
-
-                headquarter.getMenuList().add(addMenu);
-                System.out.println(addMenu);
-                System.out.println("을 추가했습니다.");
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }else System.out.println("동일한 메뉴가 존재합니다.");
+        Menu newMenu = headquarterInfoManage.createMenu(name,price);
+        System.out.println("메뉴 " + newMenu.toString() + "를 추가했습니다.");
+        System.out.println();	
     }
 
     //메뉴삭제
@@ -283,10 +278,10 @@ public class AdminController {
 
             System.out.println("메뉴 삭제를 선택하셨습니다.");
             System.out.println("삭제할 메뉴의 이름을 입력해주세요.");
-            System.out.print("메뉴 이름 입력 : ");
-            String name = sc.nextLine();
+            System.out.print("메뉴 코드 입력 : ");
+            int menuCode = sc.nextInt();
 
-            Menu deleteMenu = headquarterInfoManage.getMenu(name);
+            Menu deleteMenu = headquarterInfoManage.getMenu(menuCode);
             headquarter.getMenuList().remove(deleteMenu);
             System.out.println("삭제된 메뉴 : " + deleteMenu.toString());
 
@@ -297,13 +292,45 @@ public class AdminController {
 
     //메뉴 보여주기
     public void showMenuList() {
-        System.out.println("=========메뉴판===========");
-        for(Menu menu : headquarter.getMenuList()) {
-            System.out.println(menu.getMenuName());
-        }
-        System.out.println("========================");
+    	if(headquarter.getMenuList().size()==0){
+    		System.out.println("등록된 메뉴가 없습니다.");
+    	}else{
+    		System.out.println();
+	        System.out.println("=============메뉴리스트==============");
+	        for(Menu menu : headquarter.getMenuList()) {
+	            System.out.println(menu.toString());
+	        }
+	        System.out.println("===============================");
+    	}
     }
 
+    //회원목록
+    public void showMemberList() {
+    	if(headquarter.getMemberList().size()==0){
+    		System.out.println("회원 목록이 없습니다.");
+    	}else{
+    		System.out.println();
+	        System.out.println("=============회원리스트==============");
+	        for(Member member : headquarter.getMemberList()) {
+	            System.out.println(member.toString());
+	        }
+	        System.out.println("===============================");
+    	}
+    }
+    
+    //가맹점목록
+    public void showStoreList() {
+    	if(headquarter.getMemberList().size()==0) {
+    		System.out.println("가맹점 목록이 없습니다.");
+    	}else{
+	        System.out.println("=========가맹점 리스트===========");
+	        for(Store store : headquarter.getStoreList()) {
+	            System.out.println(store.toString());
+	        }
+	        System.out.println("============================");
+    	}
+    }
+    
     //지점들 매출 리스트 뽑기
     public void storeSalseList(){
         for(Store store : headquarter.getStoreList()) {

@@ -34,21 +34,22 @@ public class HeadquarterInfoManage implements Serializable{
         return menus;
     }
 
-    //메뉴를 꺼내서 보여줌.
-    public Menu getMenu(String name){
+    
+  //메뉴를 꺼내서 보여줌.
+    public Menu getMenu(int menuCode){
         Menu findMenu = null;
         // "menu" 키로 등록된 내부 객체가 이미 존재하면 해당 객체를 반환
         if (headquarterInfoMap.containsKey("menus")) {
             List<Menu> menuList = (List<Menu>) headquarterInfoMap.get("menus");
-            //value값 중 동일한 이름의 메뉴가 있는지 확인
             for(Menu m : menuList){
-                if(m.getMenuName().equals(name)) {
+                if(m.getMenuCode() == menuCode) {
                     findMenu = m;
                 }
             }
         }
         return  findMenu;
     }
+    
     
     //메뉴 수정
     public void setMenu(Menu menu){
@@ -65,13 +66,12 @@ public class HeadquarterInfoManage implements Serializable{
         }
     }
     
-    
-
-    public void createMenu(String name, int price) {
+    public Menu createMenu(String name, int price) {
         List<Menu> menuList = (List<Menu>) headquarterInfoMap.get("menus");
         Menu menu = new Menu(name, price);
         menuList.add(menu);
         headquarterInfoMap.put("menus", menuList);
+        return menu;
     }
 
     public List<?> getStoreAdmins() {
