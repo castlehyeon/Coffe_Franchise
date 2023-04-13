@@ -1,12 +1,17 @@
 package member;
 
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import global.Controller;
 import menu.Menu;
 import store.Headquarter;
 import store.HeadquarterInfoManage;
+import store.Sales;
 import store.Store;
 
 public class AdminController {
@@ -89,7 +94,72 @@ public class AdminController {
     //회원관리 메뉴 선택
     public void manageMembers() {
         System.out.println("회원관리를 선택하셨습니다.");
+        System.out.println("1.회원리스트 조회 2.가맹점주 등록하기 3.회원별 매출순위 ");
 
+        Scanner sc = new Scanner(System.in);
+        int menuNum = sc.nextInt();
+
+        switch (menuNum) {
+            case 1 : headquarter.getMemberList().toString();
+                headquarterMainMenu(); break;
+            case 2 : transformMember();	headquarterMainMenu();  break;	//가앰점주 등록하기
+            case 3 : rankSalesMembers(); headquarterMainMenu(); break;	//회원별 매출순위
+            case 0 : break;
+            default : System.out.println("다시 선택해주세용"); manageStores();
+        }
+
+        System.out.println();
+    }
+
+    //회원별 매출순위
+    public void rankSalesMembers() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("회원별 매출순위를 선택하셨습니다.");
+
+        Map<String,Integer> idTotalPay = new HashMap();
+        for(Store m : headquarter.getStoreList()) {
+            for(Sales s : m.getSalesList()) {
+                if(idTotalPay.containsKey(s.getMember().getID())) {//1회이상 결재내역이 있을때!
+                    int totalpay = idTotalPay.get(s.getMember().getID());
+                    totalpay += s.getPayMoney();
+                    idTotalPay.put(s.getMember().getID(),totalpay);
+                }else {
+                    idTotalPay.put(s.getMember().getID(),s.getPayMoney());
+                }
+            }
+        }
+
+        //map value의 내림차순대로 뽑기!
+        List<Map.Entry<String, Integer>> entryList = new LinkedList<>(idTotalPay.entrySet());
+        entryList.sort(new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                return o2.getValue() - o1.getValue();
+            }
+        });
+
+        for(Map.Entry<String, Integer> entry : entryList){
+            System.out.println("ID : " + entry.getKey() + ", 구매총액 : " + entry.getValue());
+        }
+    }
+
+
+    //가앰점주 등록하기
+    public void transformMember(){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("가맹점주 등록하기를 선택하셨습니다.");
+        System.out.println("예비 가맹점주의 아이디를 입력해주세요.");
+        System.out.print("ID : ");
+        String id = sc.next();
+        System.out.println("가맹점주와 연결할 매장을 선택해주세요.");
+        String storeCode = sc.next();
+
+        for(Member m : headquarter.getMemberList()) {
+            if (m.getID().equals(id)) {
+                StoreOwner storeAdmin = new StoreOwner(m.getID(), m.getPassword(), m.getPhoneNumber(), storeCode);
+            }
+        }
     }
 
     //스탬프관리 메뉴 선택
