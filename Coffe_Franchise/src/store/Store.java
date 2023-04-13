@@ -89,8 +89,8 @@ public class Store {
 
 	@Override
 	public String toString() {
-		return "Store [storeCode=" + storeCode + ", name=" + name + ", address=" + address + ", phoneNumber="
-				+ phoneNumber + ", totalSales=" + totalSales + "]";
+		return " [ 가맹점 코드 : " + storeCode + ", 가맹점 명 : " + name + ", 주소 : " + address + ", 전화번호 : "
+				+ phoneNumber + "]";
 	}
 
 

@@ -1,14 +1,17 @@
 package menu;
 
+import store.Headquarter;
+
 public class Menu {
 
+	Headquarter headquarter =  new Headquarter();
 	private int menuCode;
 	private String menuName;
 	private int menuPrice;
 	
 	//생성자 함수
 	public Menu(String menuName, int menuPrice) {
-		this.menuCode = menuCode+1;
+		this.menuCode = headquarter.getMenuList().size()+1;
 		this.menuName = menuName;
 		this.menuPrice = menuPrice;
 	}
@@ -39,10 +42,11 @@ public class Menu {
 		this.menuPrice = menuPrice;
 	}
 
+	
 
 	@Override
 	public String toString() {
-		return "Menu [menuCode=" + menuCode + ", menuName=" + menuName + ", menuPrice=" + menuPrice + "]";
+		return "[메뉴코드 : " + menuCode + ", 메뉴명 : " + menuName + ", 가격 : " + menuPrice + "]";
 	}
 
 
