@@ -1,7 +1,10 @@
-package store;
+package member;
 
 import exception.ObjectNullException;
 import menu.Menu;
+import store.Headquarter;
+import store.HeadquarterInfoManage;
+import store.Store;
 
 import java.util.Scanner;
 
