@@ -1,12 +1,11 @@
 package member;
 
-import exception.ObjectNullException;
+import java.util.Scanner;
+
 import menu.Menu;
 import store.Headquarter;
 import store.HeadquarterInfoManage;
 import store.Store;
-
-import java.util.Scanner;
 
 public class AdminController {
     //어디서든지 하나의 Headquarter객체만을 사용할 수 있다.
