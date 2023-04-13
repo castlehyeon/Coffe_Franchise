@@ -18,8 +18,6 @@ public class MemberController {
 	HeadquarterInfoManage headInfoManager = new HeadquarterInfoManage();
 	Customer customer;
 	Store store;
-	
-	
     public void start() {
     	System.out.println("고객으로 접속합니다");
     	this.selectStore();
@@ -161,5 +159,11 @@ public class MemberController {
 	}
     
     
+    public int binarySearch(List<Store> storeList, int keyIndex) {
+    	int temp = storeList.get(keyIndex).getStoreCode();
+    	while(true) {
+    		
+    	}
+    }
 
 }

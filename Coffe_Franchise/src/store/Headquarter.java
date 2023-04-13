@@ -1,12 +1,14 @@
 package store;
 
+import java.io.Serializable;
 import java.util.List;
 
 import member.Member;
+import member.StoreAdmin;
 import menu.Menu;
 
 
-public class Headquarter {
+public class Headquarter implements Serializable {
 
 	HeadquarterInfoManage headquarterInfoManage = new HeadquarterInfoManage();
 	
@@ -23,6 +25,8 @@ public class Headquarter {
 
 	private List<Member> memberList;
 
+	private List<StoreAdmin> storeAdminList;
+
 	public List<Menu> getMenuList() {
 		return menuList;
 	}
@@ -32,6 +36,9 @@ public class Headquarter {
 	}
 
 	public List<Member> getMemberList() { return memberList; }
+
+	public List<StoreAdmin> getStoreAdminList() { return storeAdminList; }
+  
 	//생성자
 	public Headquarter() {
 		//	this.headquarterName = "DuzoneCoffe";
@@ -42,7 +49,7 @@ public class Headquarter {
 		this.menuList = (List<Menu>) hm.getMenus();
 		this.storeList = (List<Store>) hm.getStores();
 		this.memberList = (List<Member>) hm.getMembers();
-
+		this.storeAdminList = (List<StoreAdmin>) hm.getStoreAdmins();
 	}
 
 
@@ -80,6 +87,19 @@ public class Headquarter {
 	//로그인
 	public Member checkLogin(String id, String password) {
 		Member loginMember = null;
+		List<StoreAdmin> storeAdminList = (List<StoreAdmin>) headquarterInfoManage.getStoreAdmins();
+		for(StoreAdmin storeAdmin : storeAdminList) {
+			if(id.equals(storeAdmin.getID())) {
+				if(password.equals(storeAdmin.getPassword())) {
+					loginMember = storeAdmin;
+				}else {
+					System.out.println("비밀번호를 다시 확인해주세요.");
+				}
+			}else {
+				System.out.println("아이디를 다시 확인해주세요.");
+			}
+		}
+
 		List<Member> memberList = (List<Member>) headquarterInfoManage.getMembers();
 		for(Member member : memberList) {
 			if(id.equals(member.getID())) {

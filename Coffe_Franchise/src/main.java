@@ -7,5 +7,4 @@ public class main {
 		Controller con = new Controller();
 		con.start();
 	}
-
 }
