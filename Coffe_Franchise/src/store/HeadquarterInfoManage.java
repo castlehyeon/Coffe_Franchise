@@ -51,6 +51,7 @@ public class HeadquarterInfoManage {
             		m = menu;
             		System.out.println("메뉴가 수정되었습니다.");
             	}
+
             }
         }
     }
@@ -79,7 +80,7 @@ public class HeadquarterInfoManage {
  
     //회원정보를 꺼내서 보여줌.
     public Member getMember(String id){
-    	Member findMember = null;
+       Member findMember = null;
         // "menu" 키로 등록된 내부 객체가 이미 존재하면 해당 객체를 반환
         if (headquarterInfoMap.containsKey("members")) {
             List<Member> memberList = (List<Member>) headquarterInfoMap.get("members");
@@ -110,15 +111,15 @@ public class HeadquarterInfoManage {
     
     
     public void createMember(String id, String password, String phoneNumber) {
-    	if(!headquarterInfoMap.containsKey("members")) {
-    		createMembers();
-    	}
+       if(!headquarterInfoMap.containsKey("members")) {
+          createMembers();
+       }
         List<Member> memberList = (List<Member>) headquarterInfoMap.get("members");
         Member member = new Customer(id,password,phoneNumber);
         memberList.add(member);
         headquarterInfoMap.put("members", memberList);
     }
-	
+   
     public List<?> getStores() {
         // "stores" 키로 등록된 내부 객체가 이미 존재하면 해당 객체를 반환
         if (headquarterInfoMap.containsKey("stores")) {
@@ -152,12 +153,12 @@ public class HeadquarterInfoManage {
         return menuList;
     }
     private List<?> createMembers() {
-    	List<Menu> memberList = new ArrayList<>();
+       List<Menu> memberList = new ArrayList<>();
         return memberList;
         // 멤버 객체 생성 로직
     }
     private List<?> createStores() {
-    	List<Menu> storeList = new ArrayList<>();
+       List<Menu> storeList = new ArrayList<>();
         return storeList;
         // 상점 객체 생성 로직
     }

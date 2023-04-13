@@ -3,6 +3,10 @@ package payment;
 public class Cash extends Payment {
 	private int inputMoney;
 	
+	public Cash(int inputMoney) {
+		this.inputMoney = inputMoney;
+	}
+	
 	public int returnChange() {
 		return this.getPaymetAmount()-this.inputMoney;
 	}

@@ -42,8 +42,8 @@ public class Headquarter {
 		//Headquarter 객체들이 생성될 때마다 스태틱에 있는 리스트들의 정보를 받아서 초기화한다.
 		HeadquarterInfoManage hm = new HeadquarterInfoManage();
 		this.menuList = (List<Menu>) hm.getMenus();
-//		this.storeList = (List<Store>) hm.getStores();
-//		this.memberList = (List<Member>) hm.getMembers();
+		this.storeList = (List<Store>) hm.getStores();
+		this.memberList = (List<Member>) hm.getMembers();
 
 	}
 
