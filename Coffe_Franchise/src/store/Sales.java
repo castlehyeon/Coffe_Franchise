@@ -7,24 +7,23 @@ import member.Order;
 import payment.Payment;
 
 public class Sales {
-	private int storeCode;
+	private Store store;
 	private List<Order> orderList;
 	private Payment payment;
 	private int payMoney;
 	private Member member;
 	public Sales(){}
-	public Sales(int storeCode, List<Order> orderList, Payment payment, int payMoney, Member member) {
-		this.storeCode = storeCode;
+	public Sales(Store store, List<Order> orderList, int payMoney, Member member) {
+		this.store = store;
 		this.orderList = orderList;
-		this.payment = payment;
 		this.payMoney = payMoney;
 		this.member = member;
 	}
-	public int getStoreCode() {
-		return storeCode;
+	public Store getStore() {
+		return store;
 	}
-	public void setStoreCode(int storeCode) {
-		this.storeCode = storeCode;
+	public void setStore(Store store) {
+		this.store = store;
 	}
 	public List<Order> getOrderList() {
 		return orderList;

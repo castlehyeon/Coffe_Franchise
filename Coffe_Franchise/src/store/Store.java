@@ -14,6 +14,8 @@ public class Store {
 
 	//상속관계를 지우기 위해 본사를 멤버필드로 갖는다. 본사의 메뉴리스트에 접근한다.
 	private Headquarter headquarter;
+	
+	public Store() {}
 
 	public Store(String name, String address, String phoneNumber) {
 		this.name = name;
