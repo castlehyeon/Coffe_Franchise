@@ -1,7 +1,9 @@
 package member;
 
+import java.util.List;
 import java.util.Scanner;
 
+import menu.Menu;
 import store.Headquarter;
 import store.Store;
 
@@ -30,32 +32,46 @@ public class MemberController {
 		Headquarter head = new Headquarter();
 		/////////////////////////////
 		boolean stop = false;
-		while (stop) {
-			try {
-				System.out.println("접속할 가맹점을 선택하세요");
-				for (Store store : head.getStoreList()) {
-					System.out.println(store.getStoreCode() + "." + store.getName());
-				}
-				int tempStoreCode = sc.nextInt();
-				String storeName = head.getStoreList().get(tempStoreCode).getName();
-				System.out.println(storeName + "을 선택하셨습니다.");
-			} catch (Exception e) {
-
+		try {
+			System.out.println("접속할 가맹점을 선택하세요");
+			for (Store store : head.getStoreList()) {
+				System.out.println(store.getName());
 			}
+			int tempStoreCode = sc.nextInt();
+			String storeName = head.getStoreList().get(tempStoreCode).getName();
+			System.out.println(storeName + "을 선택하셨습니다.");
+			this.addToCart();
+		} catch (Exception e) {
+			System.out.println("다시 선택하세요");
+			this.selectStore();
 		}
 
 	}
     
     
-    // 메뉴를 선택하고 장바구니에 추가한다.
-    public void addToCart() {
-    	
-    }
+	// 메뉴를 선택하고 장바구니에 추가한다.
+	public void addToCart() {
+		/////////////////////////////
+		Headquarter head = new Headquarter();
+		/////////////////////////////
+		head.getMenuList();
+		for(Menu menu: head.getMenuList()) {
+			System.out.println();
+		}
+
+	}
     
     
     //결제한다.
     public void purchase() {
     	
+    }
+    
+    public int binarySearch(List<Store> storeList, int keyIndex) {
+    	int temp = storeList.get(keyIndex).getStoreCode();
+    	while(true) {
+    		
+    	}
     }
 
 }
