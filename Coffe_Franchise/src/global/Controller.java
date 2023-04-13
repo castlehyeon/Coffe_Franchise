@@ -1,9 +1,7 @@
 package global;
 
-import java.io.*;
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.regex.Pattern;
 
 import member.AdminController;
@@ -18,21 +16,25 @@ import store.HeadquarterInfoManage;
 
 public class Controller{
 
-    Headquarter douzoneCoffee = new Headquarter();
+    Headquarter headquarter = new Headquarter();
     HeadquarterInfoManage headquarterInfoManage = new HeadquarterInfoManage();
     MemberController memberController= new MemberController();
     AdminController adminController = new AdminController();
     StoreOwnerController storeOwnerController = new StoreOwnerController();
-
-    public void start() {
-    	adminController.setController(this);
-    	Scanner sc = new Scanner(System.in);
-    	boolean run = true;
+    
+    public void prepare() {
     	HashMap info = HeadquarterInfoManage.load();
 		if(info!=null) {
 			headquarterInfoManage.setHeadquarterInfoMap(info);
 		}
-		headquarterInfoManage.createStoreAdmin("abc","aaaaaa1!","000-0000-0000");
+    }
+    public void start() {
+    	adminController.setController(this);
+    	memberController.setController(this);
+    	storeOwnerController.setController(this);
+    	Scanner sc = new Scanner(System.in);
+    	boolean run = true;
+    	headquarter.getStoreAdminList().add(new StoreAdmin("abc","aaaaaa1!","000-0000-0000"));
 		System.out.println("***********이디야에 오신 것을 환영합니다.***********");
 		System.out.println("1. 로그인하기 2. 회원가입하기 3. 종료하기 ");
 		int temp = sc.nextInt();
@@ -56,7 +58,7 @@ public class Controller{
 	    	System.out.print("비밀번호 입력 : ");
 	    	String pw = sc.next();
 	    	
-	    	Member loginMember = douzoneCoffee.checkLogin(id,pw);
+	    	Member loginMember = headquarter.checkLogin(id,pw);
 	    	if(loginMember != null) {
 		    	if (loginMember instanceof Customer) {
 		    		memberController.setCustomer((Customer)loginMember);
@@ -91,7 +93,7 @@ public class Controller{
         while(chRun) {
         	System.out.print("아이디 입력 : ");
         	id = sc.next();
-        	chRun = douzoneCoffee.duplicateId(id);	//ID 중복검사
+        	chRun = headquarter.duplicateId(id);	//ID 중복검사
         }chRun = true;
         
         while(chRun) {
@@ -108,7 +110,9 @@ public class Controller{
         	if(chRun == true) {System.out.println("올바른 형식을 입력해주세요.");}
         }
         
-        headquarterInfoManage.createMember(id,pw,phoneNum);
+        Member member = new Customer(id, pw, phoneNum);
+        headquarter.getMemberList().add(member);
+        
     }
 
 }

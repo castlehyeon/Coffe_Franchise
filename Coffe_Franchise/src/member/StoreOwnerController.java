@@ -2,6 +2,7 @@ package member;
 
 import java.util.Scanner;
 
+import global.Controller;
 import store.Headquarter;
 import store.HeadquarterInfoManage;
 
@@ -9,7 +10,7 @@ import store.HeadquarterInfoManage;
 public class StoreOwnerController {
     
 	Headquarter headquarter = new Headquarter();
-    HeadquarterInfoManage headquarterInfoManage = new HeadquarterInfoManage();
+    Controller controller;
     
 	public void start() {
         this.storeOwnerMainMenu();
@@ -25,7 +26,7 @@ public class StoreOwnerController {
         switch (menuNum) {
             case 1 : //showTotal();			break;//매출 보기
             case 2 : updateStoreInfo();		break;//개맹점 정보 변경
-            case 0 : break;
+            case 0 : this.controller.start(); break;
             default : System.out.println("유효한 값을 입력해주세요."); storeOwnerMainMenu();
         }
     }
@@ -56,4 +57,14 @@ public class StoreOwnerController {
 	public void showTotalClientByTime() {
 		
 	}
+
+	public Controller getController() {
+		return controller;
+	}
+
+	public void setController(Controller controller) {
+		this.controller = controller;
+	}
+	
+	
 }

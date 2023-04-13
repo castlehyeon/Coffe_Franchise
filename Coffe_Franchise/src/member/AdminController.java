@@ -211,7 +211,6 @@ public class AdminController {
 
             Store addStore = new Store(name, address, phoneNumber);
             headquarter.getStoreList().add(addStore);
-            headquarterInfoManage.createStore(addStore);
 
             System.out.print("가맹점 ");
             System.out.print(addStore.toString());
@@ -265,7 +264,8 @@ public class AdminController {
         String name = sc.next();
         System.out.print("메뉴금액: ");
         int price = sc.nextInt();
-        Menu newMenu = headquarterInfoManage.createMenu(name,price);
+        Menu newMenu = new Menu(name,price);
+        headquarter.getMenuList().add(newMenu);
         System.out.println("메뉴 " + newMenu.toString() + "를 추가했습니다.");
         System.out.println();	
     }

@@ -66,13 +66,13 @@ public class HeadquarterInfoManage implements Serializable{
         }
     }
     
-    public Menu createMenu(String name, int price) {
-        List<Menu> menuList = (List<Menu>) headquarterInfoMap.get("menus");
-        Menu menu = new Menu(name, price);
-        menuList.add(menu);
-        headquarterInfoMap.put("menus", menuList);
-        return menu;
-    }
+//    public Menu createMenu(String name, int price) {
+//        List<Menu> menuList = (List<Menu>) headquarterInfoMap.get("menus");
+//        Menu menu = new Menu(name, price);
+//        menuList.add(menu);
+//        headquarterInfoMap.put("menus", menuList);
+//        return menu;
+//    }
 
     public List<?> getStoreAdmins() {
         if (headquarterInfoMap.containsKey("storeAdmins")) {
@@ -127,36 +127,36 @@ public class HeadquarterInfoManage implements Serializable{
         }
     }
 
-    public void createStoreAdmin(String id, String pw, String phoneNum) {
-    	List<StoreAdmin> storeAdminList = null;
-        if(!headquarterInfoMap.containsKey("storeAdmins")){
-        	storeAdminList = (List<StoreAdmin>) createStoreAdmins();
-        } else {
-        	storeAdminList = (List<StoreAdmin>) headquarterInfoMap.get("storeAdmins");
-        }
-        StoreAdmin storeAdmin = new StoreAdmin(id, pw, phoneNum);
-        storeAdminList.add(storeAdmin);
-        headquarterInfoMap.put("storeAdmins", storeAdminList);
-    }
+//    public void createStoreAdmin(String id, String pw, String phoneNum) {
+//    	List<StoreAdmin> storeAdminList = null;
+//        if(!headquarterInfoMap.containsKey("storeAdmins")){
+//        	storeAdminList = (List<StoreAdmin>) createStoreAdmins();
+//        } else {
+//        	storeAdminList = (List<StoreAdmin>) headquarterInfoMap.get("storeAdmins");
+//        }
+//        StoreAdmin storeAdmin = new StoreAdmin(id, pw, phoneNum);
+//        storeAdminList.add(storeAdmin);
+//        headquarterInfoMap.put("storeAdmins", storeAdminList);
+//    }
 
-    public void createStore(Store store) {
-        if(!headquarterInfoMap.containsKey("stores")) {
-            createStores();
-        }
-        List<Store> storeList = (List<Store>) headquarterInfoMap.get("stores");
-        Store createStore = store;
-        storeList.add(createStore);
-        headquarterInfoMap.put("stores", storeList);
-    }
-    public void createMember(String id, String password, String phoneNumber) {
-       if(!headquarterInfoMap.containsKey("members")) {
-          createMembers();
-       }
-        List<Member> memberList = (List<Member>) headquarterInfoMap.get("members");
-        Member member = new Customer(id,password,phoneNumber);
-        memberList.add(member);
-        headquarterInfoMap.put("members", memberList);
-    }
+//    public void createStore(Store store) {
+//        if(!headquarterInfoMap.containsKey("stores")) {
+//            createStores();
+//        }
+//        List<Store> storeList = (List<Store>) headquarterInfoMap.get("stores");
+//        Store createStore = store;
+//        storeList.add(createStore);
+//        headquarterInfoMap.put("stores", storeList);
+//    }
+//    public void createMember(String id, String password, String phoneNumber) {
+//       if(!headquarterInfoMap.containsKey("members")) {
+//          createMembers();
+//       }
+//        List<Member> memberList = (List<Member>) headquarterInfoMap.get("members");
+//        Member member = new Customer(id,password,phoneNumber);
+//        memberList.add(member);
+//        headquarterInfoMap.put("members", memberList);
+//    }
    
     public List<?> getStores() {
         // "stores" 키로 등록된 내부 객체가 이미 존재하면 해당 객체를 반환
@@ -209,7 +209,7 @@ public class HeadquarterInfoManage implements Serializable{
         FileOutputStream fos = null;
         ObjectOutputStream out = null;
         try{
-            fos = new FileOutputStream("headquarterInfo.txt", true);
+            fos = new FileOutputStream("headquarterInfo.txt");
             out = new ObjectOutputStream(fos);
 
             out.writeObject(getHeadquarterInfoMap());
