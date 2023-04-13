@@ -1,13 +1,14 @@
 package store;
 
+import exception.ObjectNullException;
 import menu.Menu;
 
 import java.util.Scanner;
 
 public class AdminController {
     //어디서든지 하나의 Headquarter객체만을 사용할 수 있다.
-    Headquarter headquarter = Headquarter.getInstance();
-
+    Headquarter headquarter = new Headquarter();
+    HeadquarterInfoManage headquarterInfoManage = new HeadquarterInfoManage();
     public void start() {
         this.headquarterMainMenu();
     }
@@ -168,27 +169,30 @@ public class AdminController {
     }
 
     //메누생성
-    public void createMenu() {
+    public void createMenu(){
         Scanner sc = new Scanner(System.in);
 
-        try {
+        System.out.println("메뉴 생성을 선택하셨습니다.");
+        System.out.println("등록할 메뉴의 정보를 입력해주세요.");
+        System.out.print("메뉴이름 : ");
+        String name = sc.next();
+        System.out.print("메뉴금액: ");
+        int price = sc.nextInt();
+        Menu addMenu = headquarterInfoManage.getMenu(name);
+        //유효성 검사
+        if(addMenu == null) {
+            try {
+                addMenu = new Menu(name, price);
+                headquarterInfoManage.createMenu(name, price);
 
-            System.out.println("메뉴 생성을 선택하셨습니다.");
-            System.out.println("등록할 메뉴의 정보를 입력해주세요.");
-            System.out.print("메뉴이름 : ");
-            String name  = sc.next();
-            System.out.print("메뉴금액: ");
-            int price  = sc.nextInt();
+                headquarter.getMenuList().add(addMenu);
+                System.out.println(addMenu);
+                System.out.println("을 추가했습니다.");
 
-            Menu addMenu = new Menu(name, price);
-            headquarter.getMenuList().add(addMenu);
-
-            System.out.println(addMenu.toString());
-            System.out.println("을 추가했습니다.");
-
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else System.out.println("동일한 메뉴가 존재합니다.");
     }
 
     //메뉴삭제
@@ -198,11 +202,11 @@ public class AdminController {
         try {
 
             System.out.println("메뉴 삭제를 선택하셨습니다.");
-            System.out.println("삭제할 메뉴의 가맹점고유번호를 입력해주세요.");
-            System.out.print("가맹점 고유번호 입력 : ");
-            int deleteMenuCode  = sc.nextInt();
+            System.out.println("삭제할 메뉴의 이름을 입력해주세요.");
+            System.out.print("메뉴 이름 입력 : ");
+            String name = sc.nextLine();
 
-            Menu deleteMenu = selectMenu(deleteMenuCode);
+            Menu deleteMenu = headquarterInfoManage.getMenu(name);
             headquarter.getMenuList().remove(deleteMenu);
             System.out.println("삭제된 메뉴 : " + deleteMenu.toString());
 

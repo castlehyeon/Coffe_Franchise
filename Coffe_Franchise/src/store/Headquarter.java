@@ -1,16 +1,15 @@
 package store;
 
+import member.Member;
 import menu.Menu;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class Headquarter {
-	//프로그램은 하나의 본사 객체만을 사용한다.
-	private static Headquarter instance = null;
-
-
 
 	private String headquarterName;			//본사 이름
 	//private static String headquarterPhoneNumber;		//본사 전화번호
@@ -20,7 +19,10 @@ public class Headquarter {
 	}
 
 	private List<Menu> menuList;				//메뉴
-	private List<Store> storeList;				//가맹점들
+	//본사는 Store를 '리스트'로 갖고 있고, Store는 본사를 '멤버'로 갖게해서 상속을 지운다.
+	private List<Store> storeList;//가맹점들
+
+	private List<Member> memberList;
 
 	public List<Menu> getMenuList() {
 		return menuList;
@@ -30,30 +32,21 @@ public class Headquarter {
 		return storeList;
 	}
 
-	//private으로 선언하여 객체생성 방지
-	private Headquarter() {
-	//	this.headquarterName = "DuzoneCoffe";
-	//	this.headquarterPhoneNumber = "02-123-456";
-		
-		this.menuList = new ArrayList();
-		this.storeList = new ArrayList();
-
-	}
-	//같은 클래스 내에서는 접근 가능하므로 기본생성자로 객체생성이 가능하다.
-	public static Headquarter getInstance() {
+	public List<Member> getMemberList() { return memberList; }
+	//생성자
+	public Headquarter() {
 		//	this.headquarterName = "DuzoneCoffe";
 		//	this.headquarterPhoneNumber = "02-123-456";
-		if (instance == null) {
-			instance = new Headquarter();
-		}
-		return instance;
+
+		//Headquarter 객체들이 생성될 때마다 스태틱에 있는 리스트들의 정보를 받아서 초기화한다.
+		HeadquarterInfoManage hm = new HeadquarterInfoManage();
+		this.menuList = (List<Menu>) hm.getMenus();
+//		this.storeList = (List<Store>) hm.getStores();
+//		this.memberList = (List<Member>) hm.getMembers();
 
 	}
 
-	protected Headquarter(String args){
-		super();
-	}
-	
+
 //	public static String getHeadquarterName() {
 //		return headquarterName;
 //	}

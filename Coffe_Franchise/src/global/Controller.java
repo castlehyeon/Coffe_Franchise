@@ -9,7 +9,7 @@ import store.StoreOwnerController;
 
 public class Controller {
 
-    Headquarter douzoneCoffee = Headquarter.getInstance();
+    Headquarter douzoneCoffee = new Headquarter();
     MemberController memberController = new MemberController();
     AdminController adminController = new AdminController();
     StoreOwnerController storeOwnerController = new StoreOwnerController();
