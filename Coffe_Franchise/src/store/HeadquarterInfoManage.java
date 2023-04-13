@@ -1,14 +1,13 @@
 package store;
 
-import exception.ObjectNullException;
-import member.Customer;
-import member.Member;
-import menu.Menu;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import member.Customer;
+import member.Member;
+import menu.Menu;
 
 public class HeadquarterInfoManage {
     // Flyweight 패턴을 적용하기 위해 객체 간 공유할 정보를 담는 Map
@@ -47,7 +46,7 @@ public class HeadquarterInfoManage {
         List<Menu> menuList = (List<Menu>) headquarterInfoMap.get("menus");
         Menu menu = new Menu(name, price);
         menuList.add(menu);
-        headquarterInfoMap.put("menu", menuList);
+        headquarterInfoMap.put("menus", menuList);
     }
     
 
@@ -81,10 +80,10 @@ public class HeadquarterInfoManage {
     }
     
     public void createMember(String id, String password, String phoneNumber) {
-    	if(headquarterInfoMap.containsKey("members")) {
-        	createMembers();
-        }
-    	List<Member>memberList = (List<Member>) headquarterInfoMap.get("members");
+    	if(!headquarterInfoMap.containsKey("members")) {
+    		createMembers();
+    	}
+        List<Member> memberList = (List<Member>) headquarterInfoMap.get("members");
         Member member = new Customer(id,password,phoneNumber);
         memberList.add(member);
         headquarterInfoMap.put("members", memberList);

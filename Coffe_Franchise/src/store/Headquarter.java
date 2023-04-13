@@ -8,7 +8,8 @@ import menu.Menu;
 
 public class Headquarter {
 
-	HeadquarterInfoManage hm = new HeadquarterInfoManage();
+	HeadquarterInfoManage headquarterInfoManage = new HeadquarterInfoManage();
+	
 	private String headquarterName;			//본사 이름
 	//private static String headquarterPhoneNumber;		//본사 전화번호
 
@@ -40,7 +41,7 @@ public class Headquarter {
 		HeadquarterInfoManage hm = new HeadquarterInfoManage();
 		this.menuList = (List<Menu>) hm.getMenus();
 //		this.storeList = (List<Store>) hm.getStores();
-		this.memberList = (List<Member>) hm.getMembers();
+//		this.memberList = (List<Member>) hm.getMembers();
 
 	}
 
@@ -66,7 +67,7 @@ public class Headquarter {
 	//아이디 중복검사
 	public boolean duplicateId(String id) {
 		boolean chkIdRun = false;
-		List<Member> memberList = (List<Member>) hm.getMembers();
+		List<Member> memberList = (List<Member>) headquarterInfoManage.getMembers();
 		for(Member member : memberList) {
 			if(id.equals(member.getID())) {
 				chkIdRun = true;
@@ -79,7 +80,7 @@ public class Headquarter {
 	//로그인
 	public Member checkLogin(String id, String password) {
 		Member loginMember = null;
-		List<Member> memberList = (List<Member>) hm.getMembers();
+		List<Member> memberList = (List<Member>) headquarterInfoManage.getMembers();
 		for(Member member : memberList) {
 			if(id.equals(member.getID())) {
 				if(password.equals(member.getPassword())) {
