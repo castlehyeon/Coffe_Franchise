@@ -58,8 +58,7 @@ public class AdminController {
         switch (menuNum) {
             case 1 : addStore();		headquarterMainMenu();break;//가맹점 생성
             case 2 : removeStore();		headquarterMainMenu();break;//가맹점 삭제
-            case 3 : storeSalseList();	headquarterMainMenu();break;//가맹점별 매출조회
-            case 4 : showStoreList(); 	headquarterMainMenu();break;//가맹점 리스트조회
+            case 3 : showStoreList(); 	headquarterMainMenu();break;//가맹점 리스트조회
             case 0 : break;
             default : System.out.println("유효한 값을 입력해주세요."); manageStores();
         }
@@ -111,7 +110,7 @@ public class AdminController {
         
         switch (temp) {
 			case 1: System.out.printf("메뉴이름 입력 : ");
-					String menuName = sc.next();
+					String menuName = sc.nextLine();
 					menu.setMenuName(menuName);
 					headquarterInfoManage.setMenu(menu);
 					break;
@@ -185,8 +184,8 @@ public class AdminController {
     	System.out.println("예비 가맹점주의 아이디를 입력해주세요.");
     	System.out.print("ID : ");
     	String id = sc.next();
-    	System.out.println("가맹점주와 연결할 매장을 선택해주세요.");
-    	String storeCode = sc.next();
+    	System.out.println("가맹점주와 연결할 매장코드를 입력해주세요.");
+    	int storeCode = sc.nextInt();
     	
     	for(Member m : headquarter.getMemberList()) {
     		if (m.getID().equals(id)) {
@@ -203,11 +202,11 @@ public class AdminController {
             System.out.println("가맹점 추가를 선택하셨습니다.");
             System.out.println("등록할 가맹점의 정보를 입력해주세요.");
             System.out.print("가맹점 이름 : ");
-            String name  = sc.next();
+            String name  = sc.nextLine();
             System.out.print("가명점 주소 : ");
-            String address  = sc.next();
+            String address  = sc.nextLine();
             System.out.print("가맹점 핸드폰 번호 : ");
-            String phoneNumber  = sc.next();
+            String phoneNumber  = sc.nextLine();
 
             Store addStore = new Store(name, address, phoneNumber);
             headquarter.getStoreList().add(addStore);
@@ -331,12 +330,6 @@ public class AdminController {
     	}
     }
     
-    //지점들 매출 리스트 뽑기
-    public void storeSalseList(){
-        for(Store store : headquarter.getStoreList()) {
-            System.out.println(store.getName() + "지점 총 매출 : " + store.getTotalSales());
-        }
-    }
     
     
 }
