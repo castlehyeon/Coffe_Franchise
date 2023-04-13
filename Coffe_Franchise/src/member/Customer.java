@@ -9,15 +9,16 @@ import payment.Credit;
 import payment.Gifticon;
 import payment.Payment;
 import store.Sales;
+import store.Store;
 
 public class Customer extends Member implements NoneAdmin {
 	private int gifticon;	// 기프티콘 개수
 	private int stamp;		// 스탬프 개수
 	private List<Order> orders;	// 장바구니
+	private Store store;
 	
 	// 생성자
-	Customer(String ID, String password, String phoneNumber) {
-		super(ID, password, phoneNumber);
+	Customer() {
 		this.gifticon = 0;
 		this.stamp = 0;
 		this.orders = new ArrayList<Order>();
@@ -55,18 +56,18 @@ public class Customer extends Member implements NoneAdmin {
 	
 	// 결제 진행
 	public Sales payProducts(Payment payment) {
-		int totalPrice = payment.getPaymetAmount();
+		int totalPrice = 0;
+		for(Order order : orders) {
+			totalPrice += order.getMenu().getMenuPrice();
+		}
+		payment.setPaymetAmount(totalPrice);
 		System.out.printf("총 결제금액은 %d원 입니다.\n", totalPrice);
-		Sales sales = new Sales();	// 주문내역 생성
+		Sales sales = new Sales(this.store, this.orders, totalPrice, this);	// 주문내역 생성
 		
 		// 카드결제일 때
 		if(payment instanceof Credit) {
 			System.out.println("결제 완료");
-			
-			sales.setMember(this);
-			sales.setOrderList(orders);
 			sales.setPayment(payment);
-			sales.setPayMoney(totalPrice);	// storeCode를 제외한 주문내역 생성
 		} 
 		
 		// 현금결제일 때
@@ -74,15 +75,11 @@ public class Customer extends Member implements NoneAdmin {
 			// 투입한 돈보다 결제금액이 작을 때
 			if(payment.getPaymetAmount() <= ((Cash) payment).getInputMoney()) {
 				System.out.println("결제 완료");
-				((Cash)payment).returnChange();	//거스름돈 반환
-				sales.setMember(this);
-				sales.setOrderList(orders);
+				System.out.printf("거스름돈은 %d원 입니다.", ((Cash)payment).returnChange());
 				sales.setPayment(payment);
-				sales.setPayMoney(totalPrice);
 			} else {
 				System.out.println("돈이 부족합니다.");
 			}
-			
 		} 
 		
 		// 기프티콘 결제일 때
@@ -95,10 +92,7 @@ public class Customer extends Member implements NoneAdmin {
 				System.out.println("결제 완료");
 				this.gifticon -= menuCount;
 				System.out.printf("현재 잔여 기프티콘은 %d개 입니다.\n", gifticon);
-				sales.setMember(this);
-				sales.setOrderList(orders);
 				sales.setPayment(payment);
-				sales.setPayMoney(totalPrice);
 			} else {
 				System.out.println("잔여 기프티콘이 없습니다.");
 			}
@@ -108,7 +102,15 @@ public class Customer extends Member implements NoneAdmin {
 		return sales;
 	}
 
-	public void customerMainmenu() {
-
+	public Store getStore() {
+		return store;
 	}
+
+	public void setStore(Store store) {
+		this.store = store;
+	}
+
+	
+	
+	
 }
