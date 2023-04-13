@@ -207,7 +207,7 @@ public class HeadquarterInfoManage implements Serializable{
         FileOutputStream fos = null;
         ObjectOutputStream out = null;
         try{
-            fos = new FileOutputStream("headquarterInfo.txt");
+            fos = new FileOutputStream("headquarterInfo.txt", true);
             out = new ObjectOutputStream(fos);
 
             out.writeObject(getHeadquarterInfoMap());
