@@ -10,7 +10,7 @@ import store.StoreOwnerController;
 public class Controller {
 
     Headquarter douzoneCoffee = new Headquarter();
-    MemberController memberController= new MemberController();
+    MemberController memberController = new MemberController();
     AdminController adminController = new AdminController();
     StoreOwnerController storeOwnerController = new StoreOwnerController();
     public void start() {
