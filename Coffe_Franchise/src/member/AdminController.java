@@ -40,7 +40,7 @@ public class AdminController {
             case 1 : manageStores();		break;//가맹점관리
             case 2 : manageMenu();			break;//메뉴관리
             case 3 : manageMembers();		break;//회원관리
-            case 0 : break;
+            case 0 : this.controller.start(); break;
             default : System.out.println("유효한 값을 입력해주세요."); headquarterMainMenu();
         }
     }
@@ -320,7 +320,7 @@ public class AdminController {
     
     //가맹점목록
     public void showStoreList() {
-    	if(headquarter.getMemberList().size()==0) {
+    	if(headquarter.getStoreList().size()==0) {
     		System.out.println("가맹점 목록이 없습니다.");
     	}else{
 	        System.out.println("=========가맹점 리스트===========");

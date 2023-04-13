@@ -25,9 +25,10 @@ public class Controller{
     StoreOwnerController storeOwnerController = new StoreOwnerController();
 
     public void start() {
+    	adminController.setController(this);
     	Scanner sc = new Scanner(System.in);
     	boolean run = true;
-		HashMap info = HeadquarterInfoManage.load();
+    	HashMap info = HeadquarterInfoManage.load();
 		if(info!=null) {
 			headquarterInfoManage.setHeadquarterInfoMap(info);
 		}

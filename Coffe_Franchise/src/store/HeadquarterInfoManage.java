@@ -128,10 +128,12 @@ public class HeadquarterInfoManage implements Serializable{
     }
 
     public void createStoreAdmin(String id, String pw, String phoneNum) {
+    	List<StoreAdmin> storeAdminList = null;
         if(!headquarterInfoMap.containsKey("storeAdmins")){
-            createStoreAdmins();
+        	storeAdminList = (List<StoreAdmin>) createStoreAdmins();
+        } else {
+        	storeAdminList = (List<StoreAdmin>) headquarterInfoMap.get("storeAdmins");
         }
-        List<StoreAdmin> storeAdminList = (List<StoreAdmin>) headquarterInfoMap.get("storeAdmins");
         StoreAdmin storeAdmin = new StoreAdmin(id, pw, phoneNum);
         storeAdminList.add(storeAdmin);
         headquarterInfoMap.put("storeAdmins", storeAdminList);

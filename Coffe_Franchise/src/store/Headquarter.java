@@ -10,8 +10,6 @@ import menu.Menu;
 
 public class Headquarter implements Serializable {
 
-	HeadquarterInfoManage headquarterInfoManage = new HeadquarterInfoManage();
-	
 	private String headquarterName;			//본사 이름
 	//private static String headquarterPhoneNumber;		//본사 전화번호
 
@@ -19,40 +17,27 @@ public class Headquarter implements Serializable {
 		return headquarterName;
 	}
 
-	private List<Menu> menuList;				//메뉴
-	//본사는 Store를 '리스트'로 갖고 있고, Store는 본사를 '멤버'로 갖게해서 상속을 지운다.
-	private List<Store> storeList;//가맹점들
-
-	private List<Member> memberList;
-
-	private List<StoreAdmin> storeAdminList;
-
 	public List<Menu> getMenuList() {
-		return menuList;
+		return (List<Menu>) new HeadquarterInfoManage().getMenus();
 	}
 
 	public List<Store> getStoreList() {
-		return storeList;
+		return (List<Store>) new HeadquarterInfoManage().getStores();
 	}
 
-	public List<Member> getMemberList() { return memberList; }
+	public List<Member> getMemberList() { 
+		return (List<Member>) new HeadquarterInfoManage().getMembers();
+	
+	}
 
-	public List<StoreAdmin> getStoreAdminList() { return storeAdminList; }
-  
-	//생성자
-	public Headquarter() {
-		//	this.headquarterName = "DuzoneCoffe";
-		//	this.headquarterPhoneNumber = "02-123-456";
-
-		//Headquarter 객체들이 생성될 때마다 스태틱에 있는 리스트들의 정보를 받아서 초기화한다.
-		HeadquarterInfoManage hm = new HeadquarterInfoManage();
-		this.menuList = (List<Menu>) hm.getMenus();
-		this.storeList = (List<Store>) hm.getStores();
-		this.memberList = (List<Member>) hm.getMembers();
-		this.storeAdminList = (List<StoreAdmin>) hm.getStoreAdmins();
+	public List<StoreAdmin> getStoreAdminList() {
+		
+		return (List<StoreAdmin>) new HeadquarterInfoManage().getStoreAdmins();
+		
 	}
 
 
+	
 //	public static String getHeadquarterName() {
 //		return headquarterName;
 //	}
@@ -68,13 +53,13 @@ public class Headquarter implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "본사의 메뉴리스트" + menuList.toString() + "\n 가맹점 리스트" + storeList.toString();
+		return "본사의 메뉴리스트" + this.getMenuList().toString() + "\n 가맹점 리스트" + this.getStoreList().toString();
 	}
 
 	//아이디 중복검사
 	public boolean duplicateId(String id) {
 		boolean chkIdRun = false;
-		List<Member> memberList = (List<Member>) headquarterInfoManage.getMembers();
+		List<Member> memberList = this.getMemberList();
 		for(Member member : memberList) {
 			if(id.equals(member.getID())) {
 				chkIdRun = true;
@@ -90,7 +75,7 @@ public class Headquarter implements Serializable {
 		boolean isStoreAdmin = false;
 		boolean isCustomer = false;
 		
-		List<StoreAdmin> storeAdminList = (List<StoreAdmin>) headquarterInfoManage.getStoreAdmins();
+		List<StoreAdmin> storeAdminList = this.getStoreAdminList();
 		for (StoreAdmin storeAdmin : storeAdminList) {
 			if (id.equals(storeAdmin.getID())) {
 				if (password.equals(storeAdmin.getPassword())) {
@@ -100,7 +85,7 @@ public class Headquarter implements Serializable {
 			}
 		}
 		
-		List<Member> memberList = (List<Member>) headquarterInfoManage.getMembers();
+		List<Member> memberList = this.getMemberList();
 		
 		for(Member member : memberList) {
 			if(id.equals(member.getID())) {
@@ -112,7 +97,7 @@ public class Headquarter implements Serializable {
 		}
 		if(isStoreAdmin) System.out.println("본사 관리자로 로그인합니다.");
 		if(isCustomer) System.out.println("사용자로 로그인합니다.");
-		if (isStoreAdmin == false | isCustomer == false) System.out.println("일치하는 회원정보가 없습니다.");
+		if (isStoreAdmin == false && isCustomer == false) System.out.println("일치하는 회원정보가 없습니다.");
 		
 		
 		return loginMember;
