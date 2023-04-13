@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 import member.MemberController;
 import store.Headquarter;
-import store.AdminController;
-import store.StoreOwnerController;
+import member.AdminController;
+import member.StoreOwnerController;
 
 public class Controller {
 
