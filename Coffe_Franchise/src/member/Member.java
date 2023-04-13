@@ -3,15 +3,13 @@ package member;
 public abstract class Member {
 	private String ID;
 	private String password;
-	private String memberType; 
 	private String phoneNumber;
 	
 	// 생성자
 	Member() {}
-	Member(String ID, String password, String memberType, String phoneNumber) {
+	Member(String ID, String password, String phoneNumber) {
 		this.ID = ID;
 		this.password = password;
-		this.memberType = memberType;
 		this.phoneNumber = phoneNumber;
 	}
 	public String getID() {
@@ -25,12 +23,6 @@ public abstract class Member {
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	public String getMemberType() {
-		return memberType;
-	}
-	public void setMemberType(String memberType) {
-		this.memberType = memberType;
 	}
 	public String getPhoneNumber() {
 		return phoneNumber;

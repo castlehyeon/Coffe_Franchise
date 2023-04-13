@@ -1,7 +1,9 @@
 package member;
 
+import store.Store;
+
 public class StoreAdmin extends Member implements NoneAdmin {
-	private DuzoneCoffee duzoneCoffee;
+	private Store store;
 	
 	public void createMenu() {}
 	public void updateMenu() {}

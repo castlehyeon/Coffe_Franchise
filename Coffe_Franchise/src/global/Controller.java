@@ -4,13 +4,13 @@ import java.util.Scanner;
 
 import member.MemberController;
 import store.Headquarter;
-import store.AdminController;
-import store.StoreOwnerController;
+import member.AdminController;
+import member.StoreOwnerController;
 
 public class Controller {
 
     Headquarter douzoneCoffee = new Headquarter();
-    MemberController memberController= new MemberController();
+    MemberController memberController = new MemberController();
     AdminController adminController = new AdminController();
     StoreOwnerController storeOwnerController = new StoreOwnerController();
     public void start() {
