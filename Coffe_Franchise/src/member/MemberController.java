@@ -8,35 +8,22 @@ import payment.Cash;
 import payment.Credit;
 import payment.Gifticon;
 import store.Headquarter;
+import store.HeadquarterInfoManage;
 import store.Sales;
 import store.Store;
 
 public class MemberController {
 	Scanner sc = new Scanner(System.in);
 	Headquarter head = new Headquarter();
-	Customer customer = new Customer();
-	Store store = new Store();
-    public void start() {
+	HeadquarterInfoManage headInfoManager = new HeadquarterInfoManage();
+	Customer customer;
+	Store store;
+    public void start(Customer customer) {
     	System.out.println("고객으로 접속합니다");
-    	boolean stop = false;
-    	while(stop) {
-    		System.out.println("로그인이 필요합니다");
-    		System.out.println("ID를 입력하세요");
-    		String tempID = sc.nextLine();
-    		System.out.println("비밀번호를 입력하세요");
-    		String tempPW = sc.nextLine();
-    		/*
-    		 * ID와 PW를 비교해서 로그인 여부 판단한다.    		 * 
-    		 * 
-    		 */
-    	}
-    	
-//        System.out.println("아이디와 비밀번호 입력하기");
-//        System.out.println("테스트 진행 id: aaa / pw: 1234 / phone: 0000");
-//        Customer customer = new Customer("aaa","1234","0000");
-//        customer.customerMainmenu();
-
+    	this.customer = customer;
+    	this.selectStore();
     }
+    
     
     // 접속할 가맹점을 선택한다
 	public void selectStore() {
@@ -53,7 +40,7 @@ public class MemberController {
 			this.customer.setStore(store);
 			this.addToCart();
 		} catch (NullPointerException e) {
-			System.out.println(e.getMessage());
+			System.out.println("가맹점 정보가 없습니다.");
 		} catch (NumberFormatException | IndexOutOfBoundsException e) {
 			System.out.println("올바른 값을 입력하세요");
 			this.selectStore();

@@ -48,7 +48,7 @@ public class Controller {
 	    	Member loginMember = douzoneCoffee.checkLogin(id,pw);
 	    	if(loginMember != null) {
 		    	if (loginMember instanceof Customer) {
-		    		memberController.start();
+		    		memberController.start((Customer)loginMember);
 		    	}else if(loginMember instanceof StoreOwner) {
 		    		storeOwnerController.start();
 		    	}else if(loginMember instanceof StoreAdmin){

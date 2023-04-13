@@ -20,6 +20,7 @@ public class Customer extends Member implements NoneAdmin {
 	// 생성자
 	Customer() {}
 	public Customer(String ID, String password, String phoneNumber) {
+		super(ID, password, phoneNumber);
 		this.gifticon = 0;
 		this.stamp = 0;
 		this.orders = new ArrayList<Order>();
