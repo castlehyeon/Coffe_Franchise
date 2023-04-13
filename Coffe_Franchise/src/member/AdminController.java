@@ -1,10 +1,16 @@
 package member;
 
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import menu.Menu;
 import store.Headquarter;
 import store.HeadquarterInfoManage;
+import store.Sales;
 import store.Store;
 
 public class AdminController {
@@ -100,9 +106,33 @@ public class AdminController {
     //회원별 매출순위
     public void rankSalesMembers() {
     	Scanner sc = new Scanner(System.in);
-    	System.out.println("회원별 매출순위");
+    	System.out.println("회원별 매출순위를 선택하셨습니다.");
     	
+    	Map<String,Integer> idTotalPay = new HashMap();
+    	for(Store m : headquarter.getStoreList()) {
+    		for(Sales s : m.getSalesList()) {
+    			if(idTotalPay.containsKey(s.getMember().getID())) {//1회이상 결재내역이 있을때!
+    				int totalpay = idTotalPay.get(s.getMember().getID());
+    				totalpay += s.getPayMoney();
+    				idTotalPay.put(s.getMember().getID(),totalpay);
+    			}else {
+    				idTotalPay.put(s.getMember().getID(),s.getPayMoney());
+    			}
+    		}
+    	}
     	
+    	//map value의 내림차순대로 뽑기!
+    	List<Map.Entry<String, Integer>> entryList = new LinkedList<>(idTotalPay.entrySet());
+    	entryList.sort(new Comparator<Map.Entry<String, Integer>>() {
+    	    @Override
+    	    public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+    		return o2.getValue() - o1.getValue();
+    	    }
+    	});
+    	
+    	for(Map.Entry<String, Integer> entry : entryList){
+    		System.out.println("ID : " + entry.getKey() + ", 구매총액 : " + entry.getValue());
+    	}
     }
     
     
