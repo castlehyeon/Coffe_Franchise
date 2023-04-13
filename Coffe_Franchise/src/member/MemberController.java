@@ -18,6 +18,8 @@ public class MemberController {
 	HeadquarterInfoManage headInfoManager = new HeadquarterInfoManage();
 	Customer customer;
 	Store store;
+	
+	
     public void start(Customer customer) {
     	System.out.println("고객으로 접속합니다");
     	this.customer = customer;
@@ -25,7 +27,7 @@ public class MemberController {
     }
     
     
-    // 접속할 가맹점을 선택한다
+    // 접속할 가맹점 선택
 	public void selectStore() {
 		boolean stop = false;
 		try {
@@ -107,6 +109,7 @@ public class MemberController {
 					store.setSalesList(sales);
 				} else {
 					System.out.println("돈이 부족합니다.");
+					this.purchase();
 				}
 				break;
 			case 3:
@@ -121,12 +124,18 @@ public class MemberController {
 					store.setSalesList(sales);
 				} else {
 					System.out.println("기프티콘이 부족합니다.");
+					this.purchase();
 				}
 				break;
 			default:
 				System.out.println("올바른 결제 방법을 선택하십시오");
 				this.purchase();
 			}
+			
+			// 가맹점의 결제내역 업데이트
+			headInfoManager.setStore(store);
+			// 사용자의 스탬프, 기프티콘 내역 업데이트
+			headInfoManager.setMember(customer);
 		} catch (Exception e) {
 			this.purchase();
 		}
