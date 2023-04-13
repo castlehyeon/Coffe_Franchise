@@ -1,5 +1,8 @@
 import global.Controller;
+import member.Member;
+import member.StoreAdmin;
 import store.Headquarter;
+import store.HeadquarterInfoManage;
 
 public class HeadquarterMain {
 

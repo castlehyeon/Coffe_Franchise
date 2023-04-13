@@ -1,6 +1,8 @@
 package menu;
 
-public class Menu {
+import java.io.Serializable;
+
+public class Menu implements Serializable {
 
 	private int menuCode;
 	private String menuName;
