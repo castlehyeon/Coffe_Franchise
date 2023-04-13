@@ -62,6 +62,7 @@ public class Headquarter {
 		return "본사의 메뉴리스트" + menuList.toString() + "\n 가맹점 리스트" + storeList.toString();
 	}
 
+<<<<<<< HEAD
 	//아이디 중복검사
 	public boolean duplicateId(String id) {
 		boolean chkIdRun = false;
@@ -93,5 +94,7 @@ public class Headquarter {
 		
 		return loginMember;
 	}
+=======
+>>>>>>> 62203aa911804b9723d42d942bcafe66a52e3e1f
 
 }
