@@ -1,10 +1,17 @@
 package member;
 
 public abstract class Member {
-	protected String ID;
-	protected String password;
-	protected String phoneNumber;
-
+	private String ID;
+	private String password;
+	private String phoneNumber;
+	
+	// 생성자
+	Member() {}
+	Member(String ID, String password, String phoneNumber) {
+		this.ID = ID;
+		this.password = password;
+		this.phoneNumber = phoneNumber;
+	}
 	
 	public String getID() {
 		return ID;

@@ -3,19 +3,20 @@ package global;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+import member.AdminController;
 import member.Customer;
 import member.Member;
 import member.MemberController;
 import member.StoreAdmin;
 import member.StoreOwner;
-import store.AdminController;
+import member.StoreOwnerController;
 import store.Headquarter;
-import store.StoreOwnerController;
+import store.HeadquarterInfoManage;
 
 public class Controller {
 
     Headquarter douzoneCoffee = new Headquarter();
-
+    HeadquarterInfoManage headquarterInfoManage = new HeadquarterInfoManage();
     MemberController memberController= new MemberController();
     AdminController adminController = new AdminController();
     StoreOwnerController storeOwnerController = new StoreOwnerController();
@@ -63,47 +64,6 @@ public class Controller {
     	}
     }
     
-//    public void start() {
-//        Scanner sc = new Scanner(System.in);
-//
-//        boolean stop = false;
-//
-//        System.out.println("안녕하세요.");
-//        System.out.println(douzoneCoffee.getHeadquarterName() + "입니다.");
-//        
-//        do{
-//        	try{
-//		        System.out.println("1. 고객모드 2. 가맹점모드 3. 관리자모드 4. 로그인 5. 회원가입 0. 종료");
-//		        int temp = sc.nextInt();
-//		
-//		            switch (temp) {
-//		                case 1 ://고객모드
-//		                    memberController.start();
-//		                    break;
-//		                case 2 ://가맹점모드
-//		                    storeOwnerController.start();
-//		                    break;
-//		                case 3 ://관리자모드
-//		                    adminController.start();
-//		                    break;
-//		                case 4 : //로그인
-//		                	this.login();
-//		                	break;
-//		                case 5 ://회원가입
-//		                    this.joinMember();
-//		                    break;
-//		                case 0 ://종료
-//		                    stop = true;
-//		                    break;
-//		                default:
-//		            }
-//            }catch (Exception e){
-//                e.printStackTrace();
-//            }
-//
-//        }while(!stop);
-//
-//    }
 
     //회원가입
     public void joinMember() {
@@ -136,8 +96,9 @@ public class Controller {
         	if(chRun == true) {System.out.println("올바른 형식을 입력해주세요.");}
         }
         
-        Member newMember = new Customer(id,pw,phoneNum);
-        douzoneCoffee.addMember(newMember);
+        headquarterInfoManage.createMember(id,pw,phoneNum);
+        //Member newMember = new Customer(id,pw,phoneNum);
+        //douzoneCoffee.addMember(newMember);
     }
     
 }
