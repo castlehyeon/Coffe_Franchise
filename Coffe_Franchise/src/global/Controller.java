@@ -70,7 +70,7 @@ public class Controller{
 		    		start();
 		    	}
 	    	}else {
-	    		System.out.println("로그인에 실패하였습니다."); start();
+	    		System.out.println("로그인에 실패하였습니다."); this.start();
 	    	}
     	}catch (Exception e){
           e.printStackTrace();
