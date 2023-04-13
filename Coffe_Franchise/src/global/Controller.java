@@ -28,8 +28,8 @@ public class Controller {
 		System.out.println("1. 로그인하기 2. 회원가입하기 3. 종료하기 ");
 		int temp = sc.nextInt();
 		switch (temp) {
-			case 1 : this.login();		break;	//로그인하기 
-			case 2 : this.joinMember();	start(); break;	//회원가입하기
+			case 1 : this.login();					break;	//로그인하기 
+			case 2 : this.joinMember();	start(); 	break;	//회원가입하기
 			case 3 : break;	//종료
 			default: System.out.println("유효한 값을 입력해주세요.");start();
 		}
@@ -64,7 +64,6 @@ public class Controller {
     	}
     }
     
-
     //회원가입
     public void joinMember() {
         Scanner sc = new Scanner(System.in);
@@ -97,8 +96,6 @@ public class Controller {
         }
         
         headquarterInfoManage.createMember(id,pw,phoneNum);
-        //Member newMember = new Customer(id,pw,phoneNum);
-        //douzoneCoffee.addMember(newMember);
     }
     
 }

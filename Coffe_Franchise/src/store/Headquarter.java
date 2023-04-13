@@ -31,7 +31,9 @@ public class Headquarter {
 		return storeList;
 	}
 
-	public List<Member> getMemberList() { return memberList; }
+	public List<Member> getMemberList() { 
+		return memberList; 
+	}
 	//생성자
 	public Headquarter() {
 		//	this.headquarterName = "DuzoneCoffe";

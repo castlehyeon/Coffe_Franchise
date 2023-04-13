@@ -59,7 +59,6 @@ public class AdminController {
     //메뉴관리 메뉴 선택
     public void manageMenu() {
         System.out.println("메뉴관리를 선택하셨습니다.");
-
         System.out.println("1.메뉴생성 2.메뉴삭제 3.메뉴별 매출조회");
 
         Scanner sc = new Scanner(System.in);
@@ -80,10 +79,51 @@ public class AdminController {
 
     //회원관리 메뉴 선택
     public void manageMembers() {
-        System.out.println("회원관리를 선택하셨습니다.");
+    	System.out.println("회원관리를 선택하셨습니다.");
+        System.out.println("1.회원리스트 조회 2.가맹점주 등록하기 3.회원별 매출순위 ");
+        
+        Scanner sc = new Scanner(System.in);
+        int menuNum = sc.nextInt();
 
+        switch (menuNum) {
+            case 1 : headquarter.getMemberList().toString();
+            		headquarterMainMenu(); break;
+            case 2 : transformMember();	headquarterMainMenu();  break;	//가앰점주 등록하기
+            case 3 : rankSalesMembers(); headquarterMainMenu(); break;	//회원별 매출순위
+            case 0 : break;
+            default : System.out.println("다시 선택해주세용"); manageStores();
+        }
+
+        System.out.println();    
     }
-
+    
+    //회원별 매출순위
+    public void rankSalesMembers() {
+    	Scanner sc = new Scanner(System.in);
+    	System.out.println("회원별 매출순위");
+    	
+    	
+    }
+    
+    
+    //가앰점주 등록하기
+    public void transformMember(){
+    	Scanner sc = new Scanner(System.in);
+    	
+    	System.out.println("가맹점주 등록하기를 선택하셨습니다.");
+    	System.out.println("예비 가맹점주의 아이디를 입력해주세요.");
+    	System.out.print("ID : ");
+    	String id = sc.next();
+    	System.out.println("가맹점주와 연결할 매장을 선택해주세요.");
+    	String storeCode = sc.next();
+    	
+    	for(Member m : headquarter.getMemberList()) {
+    		if (m.getID().equals(id)) {
+				StoreOwner storeAdmin = new StoreOwner(m.getID(), m.getPassword(), m.getPhoneNumber(), storeCode);
+    		}
+    	}
+    }
+    
     //스탬프관리 메뉴 선택
     public void manageStamps() {
         System.out.println("스탬프관리를 선택하셨습니다.");
@@ -232,4 +272,6 @@ public class AdminController {
             System.out.println(store.getName() + "지점 총 매출 : " + store.getTotalSales());
         }
     }
+    
+    
 }

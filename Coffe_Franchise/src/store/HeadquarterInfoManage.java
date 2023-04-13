@@ -37,10 +37,25 @@ public class HeadquarterInfoManage {
                     findMenu = m;
                 }
             }
-
         }
         return  findMenu;
     }
+    
+    //메뉴 수정
+    public void setMenu(Menu menu){
+        Menu findMenu = null;
+        if (headquarterInfoMap.containsKey("menus")) {
+            List<Menu> menuList = (List<Menu>) headquarterInfoMap.get("menus");
+            for(Menu m : menuList) {
+            	if(m.getMenuCode() == menu.getMenuCode()) {
+            		m = menu;
+            		System.out.println("메뉴가 수정되었습니다.");
+            	}
+            }
+        }
+    }
+    
+    
 
     public void createMenu(String name, int price) {
         List<Menu> menuList = (List<Menu>) headquarterInfoMap.get("menus");
@@ -79,6 +94,21 @@ public class HeadquarterInfoManage {
         return  findMember;
     }
     
+    //회원정보 수정
+    public void setMember(Member member){
+        Menu findMenu = null;
+        if (headquarterInfoMap.containsKey("menus")) {
+            List<Member> memberList = (List<Member>) headquarterInfoMap.get("members");
+            for(Member m : memberList) {
+            	if(m.getID().equals(member.getID())){
+            		m = member;
+            		System.out.println(m.getID()+"님의 정보가 수정되었습니다.");
+            	}
+            }
+        }
+    }
+    
+    
     public void createMember(String id, String password, String phoneNumber) {
     	if(!headquarterInfoMap.containsKey("members")) {
     		createMembers();
@@ -99,6 +129,18 @@ public class HeadquarterInfoManage {
         List<?> stores = createStores();
         headquarterInfoMap.put("stores", stores);
         return stores;
+    }
+    
+    //가맹점정보 수정
+    public void setStore(Store store){
+        if (headquarterInfoMap.containsKey("menus")) {
+            List<Store> storeList = (List<Store>) headquarterInfoMap.get("stores");
+            for(Store s : storeList) {
+            	if(s.getStoreCode() == store.getStoreCode()){
+            		s = store;
+            	}
+            }
+        }
     }
 
     // 실제로 객체를 생성하는 메서드, public으로 선언해도 될까

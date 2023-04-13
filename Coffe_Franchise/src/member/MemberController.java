@@ -72,6 +72,7 @@ public class MemberController {
     	
     }
     
+    
     public int binarySearch(List<Store> storeList, int keyIndex) {
     	int temp = storeList.get(keyIndex).getStoreCode();
     	while(true) {
