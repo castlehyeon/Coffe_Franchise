@@ -102,7 +102,7 @@ public class Customer extends Member implements NoneAdmin {
 			} else {
 				System.out.println("잔여 기프티콘이 없습니다.");
 			}
-			
+		
 		}
 		
 		return sales;
