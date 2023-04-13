@@ -20,9 +20,8 @@ public class MemberController {
 	Store store;
 	
 	
-    public void start(Customer customer) {
+    public void start() {
     	System.out.println("고객으로 접속합니다");
-    	this.customer = customer;
     	this.selectStore();
     }
     
