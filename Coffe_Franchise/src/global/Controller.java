@@ -76,7 +76,6 @@ public class Controller{
     	}
     }
     
-
     //회원가입
     public void joinMember() {
         Scanner sc = new Scanner(System.in);
@@ -109,8 +108,6 @@ public class Controller{
         }
         
         headquarterInfoManage.createMember(id,pw,phoneNum);
-        //Member newMember = new Customer(id,pw,phoneNum);
-        //douzoneCoffee.addMember(newMember);
     }
 
 }

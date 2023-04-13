@@ -56,10 +56,11 @@ public class HeadquarterInfoManage implements Serializable{
         if (headquarterInfoMap.containsKey("menus")) {
             List<Menu> menuList = (List<Menu>) headquarterInfoMap.get("menus");
             for(Menu m : menuList) {
-               if(m.getMenuCode() == menu.getMenuCode()) {
-                  m = menu;
-                  System.out.println("메뉴가 수정되었습니다.");
-               }
+            	if(m.getMenuCode() == menu.getMenuCode()) {
+            		m = menu;
+            		System.out.println("메뉴가 수정되었습니다.");
+            	}
+
             }
         }
     }
@@ -118,10 +119,10 @@ public class HeadquarterInfoManage implements Serializable{
         if (headquarterInfoMap.containsKey("menus")) {
             List<Member> memberList = (List<Member>) headquarterInfoMap.get("members");
             for(Member m : memberList) {
-               if(m.getID().equals(member.getID())){
-                  m = member;
-                  System.out.println(m.getID()+"님의 정보가 수정되었습니다.");
-               }
+            	if(m.getID().equals(member.getID())){
+            		m = member;
+            		System.out.println(m.getID()+"님의 정보가 수정되었습니다.");
+            	}
             }
         }
     }
@@ -172,9 +173,9 @@ public class HeadquarterInfoManage implements Serializable{
         if (headquarterInfoMap.containsKey("menus")) {
             List<Store> storeList = (List<Store>) headquarterInfoMap.get("stores");
             for(Store s : storeList) {
-               if(s.getStoreCode() == store.getStoreCode()){
-                  s = store;
-               }
+            	if(s.getStoreCode() == store.getStoreCode()){
+            		s = store;
+            	}
             }
         }
     }

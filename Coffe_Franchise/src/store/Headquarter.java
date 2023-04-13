@@ -38,6 +38,7 @@ public class Headquarter implements Serializable {
 	public List<Member> getMemberList() { return memberList; }
 
 	public List<StoreAdmin> getStoreAdminList() { return storeAdminList; }
+  
 	//생성자
 	public Headquarter() {
 		//	this.headquarterName = "DuzoneCoffe";
