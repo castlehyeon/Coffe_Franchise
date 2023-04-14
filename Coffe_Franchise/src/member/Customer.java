@@ -40,20 +40,27 @@ public class Customer extends Member implements NoneAdmin {
 		for(Order order: orders) {
 			addStamp += order.getMenuCount();
 		}
-		System.out.printf("현재 스탬프는 %d개 입니다.\n", this.stamp);
+		System.out.printf("현재 스탬프는 %d개, 기프티콘은 %d개 입니다.\n", this.stamp, this.gifticon);
+		int currentStamp = this.stamp;
 		this.stamp += addStamp;
-		System.out.printf("총 %d개 적립되어 현재 스탬프는 %d개 입니다.\n", addStamp, this.stamp);
+		int currentGift = this.gifticon;
+		System.out.printf("스탬프 총 %d개 적립되어 현재 스탬프는 %d개 입니다.\n", addStamp, this.stamp);
+		System.out.println("잔여 스탬프를 기프티콘으로 변환합니다.");
 		this.createGifticon();	// 스탬프 적립 후 기프티콘으로 전환
+		System.out.printf("현재 스탬프는 %d개, 기프티콘은 %d개 입니다.\n", this.stamp, this.gifticon);
 		this.orders = new ArrayList<Order>();	// 장바구니 초기화
 		
 	}
 	
 	// 현재 보유중인 스탬프를 모두 기프티콘을 전환
 	public void createGifticon() {
+		int temp = 0;
 		while(this.stamp / 10 >= 1) {
 			this.stamp -= 10;
 			this.gifticon++;
+			temp++;
 		}
+		System.out.printf("스탬프 %d개를 기프티콘 %d개로 변환했습니다.\n", temp*10, temp);
 	}
 	
 	// 결제 진행
