@@ -172,10 +172,11 @@ public class AdminController {
     		return o2.getValue() - o1.getValue();
     	    }
     	});
-    	
+    	System.out.println("==========================");
     	for(Map.Entry<String, Integer> entry : entryList){
     		System.out.println("ID : " + entry.getKey() + ", 구매총액 : " + entry.getValue());
     	}
+    	System.out.println("==========================");
     }
     
     

@@ -36,7 +36,7 @@ public class StoreOwnerController {
 
     //메인메뉴
     public void storeOwnerMainMenu() {
-        System.out.println("1.매출보기 2.가맹점정보 변경 0.종료");
+        System.out.println("1.오늘매출보기 2.가맹점정보 변경 0.종료");
 
         Scanner sc = new Scanner(System.in);
         int menuNum = sc.nextInt();
@@ -75,7 +75,7 @@ public class StoreOwnerController {
 		
 	//시간대별 매출보기
 	public void showTotalSalesByTime() {
-		System.out.println("시간대별 매출보기를 선택하셨습니다.");
+		System.out.println("오늘매출보기를 선택하셨습니다.");
 		
 		this.myStore = headquarterInfoManage.setMyStore(storeOwner);
 		
@@ -111,11 +111,10 @@ public class StoreOwnerController {
     	});
     	
     	//오늘 하루 총매출 구하기
-    	System.out.println();
     	System.out.println("==========================");
     	System.out.println(today);
-    	System.out.println("총 매출 : " + todayTotalSales);
-    	System.out.println("시간대별 매출 기록");
+    	System.out.println("* 총 매출 : " + todayTotalSales);
+    	System.out.println("* 시간대별 매출 기록");
     	for(Map.Entry<Integer, Integer> entry : entryList){
     		System.out.println("시간 : " + entry.getKey() + " 매출액 : " + entry.getValue());
     	}
