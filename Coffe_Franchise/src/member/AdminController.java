@@ -50,7 +50,8 @@ public class AdminController {
     public void manageStores() {
         System.out.println("가맹점관리를 선택하셨습니다.");
 
-        System.out.println("1.가맹점생성 2.가맹점삭제 3.가맹점별 매출조회 4.가맹점 리스트");
+        System.out.println("1.가맹점생성 2.가맹점삭제 3.가맹점 리스트");
+//        System.out.println("1.가맹점생성 2.가맹점삭제 3.가맹점별 매출조회 4.가맹점 리스트");
 
         Scanner sc = new Scanner(System.in);
         int menuNum = sc.nextInt();
@@ -330,7 +331,5 @@ public class AdminController {
 	        System.out.println("============================");
     	}
     }
-    
-    
     
 }
