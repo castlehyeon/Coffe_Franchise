@@ -1,6 +1,7 @@
 package global;
 
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -37,14 +38,29 @@ public class Controller{
 		boolean run = true;
 		System.out.println("***********이디야에 오신 것을 환영합니다.***********");
 		System.out.println("1. 로그인하기 2. 회원가입하기 3. 종료하기 ");
-		int temp = sc.nextInt();
-		switch (temp) {
-			case 1 : this.login();		break;	//로그인하기 
-			case 2 : this.joinMember();	start(); break;	//회원가입하기
-			case 3 :
-				headquarterInfoManage.save();
-				break;	//종료
-			default: System.out.println("유효한 값을 입력해주세요.");start();
+		int temp = -1;
+		while(run) {
+			try {
+				temp = sc.nextInt();
+			} catch (InputMismatchException e) {
+			} finally {
+				switch (temp) {
+					case 1:
+						this.login();
+						break;    //로그인하기
+					case 2:
+						this.joinMember();
+						start();
+						break;    //회원가입하기
+					case 3:
+						headquarterInfoManage.save();
+						break;    //종료
+					default:
+						System.out.println("유효한 값을 입력해주세요.");
+						start();
+				}
+
+			}
 		}
     }
     
