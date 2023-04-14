@@ -44,6 +44,7 @@ public class MemberController {
 		} catch (NullPointerException e) {
 			System.out.println("가맹점 정보가 없습니다.");
 		} catch (NumberFormatException | IndexOutOfBoundsException e) {
+			System.out.println(e.getMessage());
 			System.out.println("올바른 값을 입력하세요");
 			this.selectStore();
 		}
@@ -53,16 +54,18 @@ public class MemberController {
     
 	// 메뉴를 선택하고 장바구니에 추가한다.
 	public void addToCart() {
+		System.out.println("-----------메뉴-----------");
 		System.out.println("메뉴를 선택하십시오");
 		try {
 			for (int i = 0; i < head.getMenuList().size(); i++) {
-				System.out.println(i + ". " + head.getMenuList().get(i).getMenuName());
+				System.out.printf("%d : %s     %d원\n", i, head.getMenuList().get(i).getMenuName(), head.getMenuList().get(i).getMenuPrice());
 			}
 			int index = sc.nextInt();
 			Menu menu = head.getMenuList().get(index);
 			System.out.println("주문 수량을 입력해 주세요.");
 			int menuCount = sc.nextInt();
 			customer.orderMenu(menuCount, menu);
+			sc.nextLine();
 			boolean stop = false;
 			while (stop==false) {
 				System.out.println("계속 하시겠습니까? (y/n)");
@@ -87,14 +90,19 @@ public class MemberController {
     //결제한다.
 	public void purchase() {
 		try {
+			System.out.println("-----------주문서-----------");
+			int totalPrice = 0;
+			for(Order order: this.customer.getOrders()) {
+				System.out.printf("메뉴 이름 : %s, 가격 : %d, 수량 : %d\n", order.getMenu().getMenuName(), order.getMenu().getMenuPrice(), order.getMenuCount());
+				totalPrice += order.getMenu().getMenuPrice() * order.getMenuCount();
+			}
+			System.out.println("--------------------------");
+			System.out.printf("총 결제 예정금액은 %d원 입니다.\n", totalPrice);
 			System.out.println("결제 방법을 선택하십시오");
 			System.out.println("1.카드	2.현금	3.기프티콘");
 			int select = sc.nextInt();
 			List<Sales> sales = store.getSalesList();
-			int totalPrice = 0;
-			for(Order order: this.customer.getOrders()) {
-				totalPrice += order.getMenu().getMenuPrice() * order.getMenuCount();
-			}
+			
 			switch (select) {
 			case 1:
 				sales.add(customer.payProducts(new Credit(), totalPrice));
@@ -103,7 +111,7 @@ public class MemberController {
 			case 2:
 				System.out.println("현금을 투입해 주십시오");
 				int inputMoney = sc.nextInt();
-				if (totalPrice >= inputMoney) {
+				if (totalPrice <= inputMoney) {
 					sales.add(customer.payProducts(new Cash(inputMoney), totalPrice));
 					store.setSalesList(sales);
 				} else {

@@ -20,7 +20,7 @@ public class Store implements Serializable {
 		this.name = name;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
-		this.storeCode = storeCode + 1;
+		this.storeCode = new Headquarter().getStoreList().size() + 1;
 		this.salesList = new ArrayList<Sales>();
 		this.headquarter = new Headquarter();
 	}
