@@ -50,7 +50,8 @@ public class AdminController {
     public void manageStores() {
         System.out.println("가맹점관리를 선택하셨습니다.");
 
-        System.out.println("1.가맹점생성 2.가맹점삭제 3.가맹점별 매출조회 4.가맹점 리스트");
+        System.out.println("1.가맹점생성 2.가맹점삭제 3.가맹점 리스트");
+//        System.out.println("1.가맹점생성 2.가맹점삭제 3.가맹점별 매출조회 4.가맹점 리스트");
 
         Scanner sc = new Scanner(System.in);
         int menuNum = sc.nextInt();
@@ -58,8 +59,8 @@ public class AdminController {
         switch (menuNum) {
             case 1 : addStore();		headquarterMainMenu();break;//가맹점 생성
             case 2 : removeStore();		headquarterMainMenu();break;//가맹점 삭제
-            case 3 : storeSalseList();	headquarterMainMenu();break;//가맹점별 매출조회
-            case 4 : showStoreList(); 	headquarterMainMenu();break;//가맹점 리스트조회
+            //case 3 : storeSalseList();	headquarterMainMenu();break;//가맹점별 매출조회
+            case 3 : showStoreList(); 	headquarterMainMenu();break;//가맹점 리스트조회
             case 0 : break;
             default : System.out.println("유효한 값을 입력해주세요."); manageStores();
         }
@@ -331,12 +332,11 @@ public class AdminController {
     	}
     }
     
-    //지점들 매출 리스트 뽑기
-    public void storeSalseList(){
-        for(Store store : headquarter.getStoreList()) {
-            System.out.println(store.getName() + "지점 총 매출 : " + store.getTotalSales());
-        }
-    }
-    
+//    //지점들 매출 리스트 뽑기
+//    public void storeSalseList(){
+//        for(Store store : headquarter.getStoreList()) {
+//            System.out.println(store.getName() + "지점 총 매출 : " + store.getTotalSales());
+//        }
+//    }
     
 }
