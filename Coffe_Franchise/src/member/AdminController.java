@@ -1,11 +1,6 @@
 package member;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 import global.Controller;
 import menu.Menu;
@@ -34,14 +29,32 @@ public class AdminController {
         System.out.println("1.가맹점관리 2.메뉴관리 3.회원관리 0.종료");
 
         Scanner sc = new Scanner(System.in);
-        int menuNum = sc.nextInt();
+        int menuNum = -1;
+        boolean run = true;
+        while (run) {
+            try {
+                menuNum = sc.nextInt();
+            } catch (InputMismatchException e) {
+            } finally {
 
-        switch (menuNum) {
-            case 1 : manageStores();		break;//가맹점관리
-            case 2 : manageMenu();			break;//메뉴관리
-            case 3 : manageMembers();		break;//회원관리
-            case 0 : this.controller.start(); break;
-            default : System.out.println("유효한 값을 입력해주세요."); headquarterMainMenu();
+                switch (menuNum) {
+                    case 1:
+                        manageStores();
+                        break;//가맹점관리
+                    case 2:
+                        manageMenu();
+                        break;//메뉴관리
+                    case 3:
+                        manageMembers();
+                        break;//회원관리
+                    case 0:
+                        this.controller.start();
+                        break;
+                    default:
+                        System.out.println("유효한 값을 입력해주세요.");
+                        headquarterMainMenu();
+                }
+            }
         }
     }
 
@@ -54,19 +67,37 @@ public class AdminController {
 //        System.out.println("1.가맹점생성 2.가맹점삭제 3.가맹점별 매출조회 4.가맹점 리스트");
 
         Scanner sc = new Scanner(System.in);
-        int menuNum = sc.nextInt();
+        int menuNum = -1;
+        boolean run = true;
+        while (run) {
+            try {
+                menuNum = sc.nextInt();
+            } catch (InputMismatchException e) {
+            } finally {
+                switch (menuNum) {
+                    case 1:
+                        addStore();
+                        headquarterMainMenu();
+                        break;//가맹점 생성
+                    case 2:
+                        removeStore();
+                        headquarterMainMenu();
+                        break;//가맹점 삭제
+                    case 3:
+                        showStoreList();
+                        headquarterMainMenu();
+                        break;//가맹점 리스트조회
+                    case 0:
+                        break;
+                    default:
+                        System.out.println("유효한 값을 입력해주세요.");
+                        manageStores();
+                }
 
-        switch (menuNum) {
-            case 1 : addStore();		headquarterMainMenu();break;//가맹점 생성
-            case 2 : removeStore();		headquarterMainMenu();break;//가맹점 삭제
-            case 3 : showStoreList(); 	headquarterMainMenu();break;//가맹점 리스트조회
-            case 0 : break;
-            default : System.out.println("유효한 값을 입력해주세요."); manageStores();
+
+                System.out.println();
+            }
         }
-
-
-        System.out.println();
-
     }
 
     //메뉴관리 메뉴 선택
@@ -76,24 +107,44 @@ public class AdminController {
         System.out.println("1.메뉴생성 2.메뉴삭제 3.메뉴 수정");
 
         Scanner sc = new Scanner(System.in);
-        int menuNum = sc.nextInt();
+        int menuNum = -1;
+        boolean run = true;
+        while (run) {
+            try {
+                menuNum = sc.nextInt();
+            } catch (InputMismatchException e) {
+            } finally {
 
-        switch (menuNum) {
-            case 1 : createMenu();		headquarterMainMenu(); break;	//메뉴 생성
-            case 2 : deleteMenu();		headquarterMainMenu(); break;	//메뉴 삭제
-            case 3 : updateMenu();		headquarterMainMenu(); break;	//메뉴 수정
-            case 0 : break;
-            default : System.out.println("유효한 값을 입력해주세요."); manageStores();
+
+                switch (menuNum) {
+                    case 1:
+                        createMenu();
+                        headquarterMainMenu();
+                        break;    //메뉴 생성
+                    case 2:
+                        deleteMenu();
+                        headquarterMainMenu();
+                        break;    //메뉴 삭제
+                    case 3:
+                        updateMenu();
+                        headquarterMainMenu();
+                        break;    //메뉴 수정
+                    case 0:
+                        break;
+                    default:
+                        System.out.println("유효한 값을 입력해주세요.");
+                        manageStores();
+                }
+            }
+
+            System.out.println();
         }
-
-        System.out.println();
-
     }
 
     //메뉴수정
     public void updateMenu() {
     	Scanner sc = new Scanner(System.in);
-    	int temp = 0;
+    	int menuNum = 0;
     	
     	System.out.println("메뉴수정을 선택하셨습니다.");
     	System.out.println("현재 메뉴");
@@ -107,22 +158,30 @@ public class AdminController {
         
         System.out.println("변경할 항목을 선택해주세요.");
         System.out.println("1. 메뉴이름 2. 메뉴가격");
-        temp = sc.nextInt();
-        
-        switch (temp) {
-			case 1: System.out.printf("메뉴이름 입력 : ");
-					String menuName = sc.nextLine();
-					menu.setMenuName(menuName);
-					headquarterInfoManage.setMenu(menu);
-					break;
-			case 2: System.out.printf("메뉴가격 입력 : ");
-					int menuPrice = sc.nextInt();
-					menu.setMenuPrice(menuPrice);
-					headquarterInfoManage.setMenu(menu);
-					break;
-			default:
-		}
-    	
+
+        boolean run = true;
+        while (run) {
+            try {
+                menuNum = sc.nextInt();
+            } catch (InputMismatchException e) {
+            } finally {
+                switch (menuNum) {
+                    case 1:
+                        System.out.printf("메뉴이름 입력 : ");
+                        String menuName = sc.nextLine();
+                        menu.setMenuName(menuName);
+                        headquarterInfoManage.setMenu(menu);
+                        break;
+                    case 2:
+                        System.out.printf("메뉴가격 입력 : ");
+                        int menuPrice = sc.nextInt();
+                        menu.setMenuPrice(menuPrice);
+                        headquarterInfoManage.setMenu(menu);
+                        break;
+                    default:
+                }
+            }
+        }
     }
     
     //회원관리 메뉴 선택
@@ -131,17 +190,36 @@ public class AdminController {
         System.out.println("1.회원리스트 조회 2.가맹점주 등록하기 3.회원별 매출순위 ");
         
         Scanner sc = new Scanner(System.in);
-        int menuNum = sc.nextInt();
+        int menuNum = -1;
+        boolean run = true;
+        while (run) {
+            try {
+                menuNum = sc.nextInt();
+            } catch (InputMismatchException e) {
+            } finally {
+                switch (menuNum) {
+                    case 1:
+                        showMemberList();
+                        headquarterMainMenu();
+                        break;    //회원리스트
+                    case 2:
+                        transformMember();
+                        headquarterMainMenu();
+                        break;    //가앰점주 등록하기
+                    case 3:
+                        rankSalesMembers();
+                        headquarterMainMenu();
+                        break;    //회원별 매출순위
+                    case 0:
+                        break;
+                    default:
+                        System.out.println("다시 선택해주세용");
+                        manageStores();
+                }
+            }
 
-        switch (menuNum) {
-            case 1 : showMemberList();	headquarterMainMenu(); 	break;	//회원리스트
-            case 2 : transformMember();	headquarterMainMenu();  break;	//가앰점주 등록하기
-            case 3 : rankSalesMembers(); headquarterMainMenu(); break;	//회원별 매출순위
-            case 0 : break;
-            default : System.out.println("다시 선택해주세용"); manageStores();
+            System.out.println();
         }
-
-        System.out.println();    
     }
     
     //회원별 매출순위
