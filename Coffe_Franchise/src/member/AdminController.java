@@ -50,7 +50,7 @@ public class AdminController {
     public void manageStores() {
         System.out.println("가맹점관리를 선택하셨습니다.");
 
-        System.out.println("1.가맹점생성 2.가맹점삭제 3.가맹점 리스트");
+        System.out.println("1.가맹점생성 2.가맹점삭제 3.가맹점 리스트 4.관리자 메뉴로 돌아가기");
 //        System.out.println("1.가맹점생성 2.가맹점삭제 3.가맹점별 매출조회 4.가맹점 리스트");
 
         Scanner sc = new Scanner(System.in);
@@ -60,6 +60,7 @@ public class AdminController {
             case 1 : addStore();		headquarterMainMenu();break;//가맹점 생성
             case 2 : removeStore();		headquarterMainMenu();break;//가맹점 삭제
             case 3 : showStoreList(); 	headquarterMainMenu();break;//가맹점 리스트조회
+            case 4 : headquarterMainMenu();break;					//관리자 메뉴로 돌아가기
             case 0 : break;
             default : System.out.println("유효한 값을 입력해주세요."); manageStores();
         }
@@ -73,7 +74,7 @@ public class AdminController {
     public void manageMenu() {
         System.out.println("메뉴관리를 선택하셨습니다.");
         showMenuList();
-        System.out.println("1.메뉴생성 2.메뉴삭제 3.메뉴 수정");
+        System.out.println("1.메뉴생성 2.메뉴삭제 3.메뉴 수정 4. 관리자 메뉴로 돌아가기");
 
         Scanner sc = new Scanner(System.in);
         int menuNum = sc.nextInt();
@@ -82,6 +83,7 @@ public class AdminController {
             case 1 : createMenu();		headquarterMainMenu(); break;	//메뉴 생성
             case 2 : deleteMenu();		headquarterMainMenu(); break;	//메뉴 삭제
             case 3 : updateMenu();		headquarterMainMenu(); break;	//메뉴 수정
+            case 4 : headquarterMainMenu();break;					//관리자 메뉴로 돌아가기
             case 0 : break;
             default : System.out.println("유효한 값을 입력해주세요."); manageStores();
         }

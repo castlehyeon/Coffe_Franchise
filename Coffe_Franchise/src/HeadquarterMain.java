@@ -1,18 +1,14 @@
-import global.Controller;
-import member.Member;
-import member.StoreAdmin;
-import store.Headquarter;
-import store.HeadquarterInfoManage;
+import member.AdminController;
 
 public class HeadquarterMain {
 
 	public static void main(String[] args) {
 
-		Controller controller = new Controller();
-		controller.prepare();
-		controller.start();
-
-		
+//		Controller controller = new Controller();
+//		controller.prepare();
+//		controller.start();
+		AdminController con = new AdminController();
+		con.start();
 	}
 
 }
