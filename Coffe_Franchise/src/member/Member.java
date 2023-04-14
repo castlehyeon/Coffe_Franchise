@@ -33,4 +33,10 @@ public abstract class Member implements Serializable {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+
+	@Override
+	public String toString() {
+		return "[ 회원 ID : " + ID + "회원 전화번호" + phoneNumber +
+				"]";
+	}
 }
