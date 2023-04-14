@@ -40,7 +40,7 @@ public class AdminController {
             case 1 : manageStores();		break;//가맹점관리
             case 2 : manageMenu();			break;//메뉴관리
             case 3 : manageMembers();		break;//회원관리
-            case 0 : break;
+            case 0 : this.controller.start(); break;
             default : System.out.println("유효한 값을 입력해주세요."); headquarterMainMenu();
         }
     }
@@ -59,7 +59,6 @@ public class AdminController {
         switch (menuNum) {
             case 1 : addStore();		headquarterMainMenu();break;//가맹점 생성
             case 2 : removeStore();		headquarterMainMenu();break;//가맹점 삭제
-            //case 3 : storeSalseList();	headquarterMainMenu();break;//가맹점별 매출조회
             case 3 : showStoreList(); 	headquarterMainMenu();break;//가맹점 리스트조회
             case 0 : break;
             default : System.out.println("유효한 값을 입력해주세요."); manageStores();
@@ -192,6 +191,7 @@ public class AdminController {
     	for(Member m : headquarter.getMemberList()) {
     		if (m.getID().equals(id)) {
 				StoreOwner storeAdmin = new StoreOwner(m.getID(), m.getPassword(), m.getPhoneNumber(), storeCode);
+				
     		}
     	}
     }
@@ -212,7 +212,6 @@ public class AdminController {
 
             Store addStore = new Store(name, address, phoneNumber);
             headquarter.getStoreList().add(addStore);
-            headquarterInfoManage.createStore(addStore);
 
             System.out.print("가맹점 ");
             System.out.print(addStore.toString());
@@ -266,7 +265,8 @@ public class AdminController {
         String name = sc.next();
         System.out.print("메뉴금액: ");
         int price = sc.nextInt();
-        Menu newMenu = headquarterInfoManage.createMenu(name,price);
+        Menu newMenu = new Menu(name,price);
+        headquarter.getMenuList().add(newMenu);
         System.out.println("메뉴 " + newMenu.toString() + "를 추가했습니다.");
         System.out.println();	
     }
@@ -321,7 +321,7 @@ public class AdminController {
     
     //가맹점목록
     public void showStoreList() {
-    	if(headquarter.getMemberList().size()==0) {
+    	if(headquarter.getStoreList().size()==0) {
     		System.out.println("가맹점 목록이 없습니다.");
     	}else{
 	        System.out.println("=========가맹점 리스트===========");
@@ -331,12 +331,5 @@ public class AdminController {
 	        System.out.println("============================");
     	}
     }
-    
-//    //지점들 매출 리스트 뽑기
-//    public void storeSalseList(){
-//        for(Store store : headquarter.getStoreList()) {
-//            System.out.println(store.getName() + "지점 총 매출 : " + store.getTotalSales());
-//        }
-//    }
     
 }

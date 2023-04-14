@@ -42,7 +42,7 @@ public class Customer extends Member implements NoneAdmin {
 		}
 		System.out.printf("현재 스탬프는 %d개 입니다.\n", this.stamp);
 		this.stamp += addStamp;
-		System.out.printf("총 %d개 적리되어 현재 스탬프는 %d개 입니다.\n", addStamp, this.stamp);
+		System.out.printf("총 %d개 적립되어 현재 스탬프는 %d개 입니다.\n", addStamp, this.stamp);
 		this.createGifticon();	// 스탬프 적립 후 기프티콘으로 전환
 		this.orders = new ArrayList<Order>();	// 장바구니 초기화
 		

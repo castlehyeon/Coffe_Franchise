@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import global.Controller;
 import store.Headquarter;
 import store.HeadquarterInfoManage;
 import store.Sales;
@@ -18,6 +19,7 @@ import store.Store;
 public class StoreOwnerController {
     
 	Headquarter headquarter = new Headquarter();
+    Controller controller;
     HeadquarterInfoManage headquarterInfoManage = new HeadquarterInfoManage();
     StoreOwner storeOwner;
     private Store myStore;
@@ -38,10 +40,9 @@ public class StoreOwnerController {
         int menuNum = sc.nextInt();
 
         switch (menuNum) {
-            //case 1 : showTotal();			break;//매출 보기
-        	case 1 : showTotalSalesByTime(); 	break;	//시간대별 매출보기
-        	case 2 : updateStoreInfo();			break;	//개맹점 정보 변경
-            case 0 : break;
+            case 1 : //showTotal();			break;//매출 보기
+            case 2 : updateStoreInfo();		break;//개맹점 정보 변경
+            case 0 : this.controller.start(); break;
             default : System.out.println("유효한 값을 입력해주세요."); storeOwnerMainMenu();
         }
     }
@@ -138,4 +139,14 @@ public class StoreOwnerController {
 		
 		return todaySalesList;
 	}
+
+	public Controller getController() {
+		return controller;
+	}
+
+	public void setController(Controller controller) {
+		this.controller = controller;
+	}
+	
+	
 }

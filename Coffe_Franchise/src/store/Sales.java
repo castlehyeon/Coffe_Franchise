@@ -1,12 +1,13 @@
 package store;
 
+import java.io.Serializable;
 import java.util.List;
 
 import member.Member;
 import member.Order;
 import payment.Payment;
 
-public class Sales {
+public class Sales implements Serializable {
 	private Store store;
 	private List<Order> orderList;
 	private Payment payment;

@@ -3,6 +3,7 @@ package member;
 import java.util.List;
 import java.util.Scanner;
 
+import global.Controller;
 import menu.Menu;
 import payment.Cash;
 import payment.Credit;
@@ -14,10 +15,11 @@ import store.Store;
 
 public class MemberController {
 	Scanner sc = new Scanner(System.in);
-	Headquarter head = new Headquarter();
-	HeadquarterInfoManage headInfoManager = new HeadquarterInfoManage();
-	Customer customer;
-	Store store;
+	private Headquarter head = new Headquarter();
+	private HeadquarterInfoManage headInfo = new HeadquarterInfoManage();
+	private Customer customer;
+	private Controller controller;
+	private Store store;
     public void start() {
     	System.out.println("고객으로 접속합니다");
     	this.selectStore();
@@ -34,6 +36,7 @@ public class MemberController {
 			}
 			int index = sc.nextInt();
 			Store store = head.getStoreList().get(index);
+			this.setStore(store);
 			String storeName = store.getName();
 			System.out.println(storeName + "을 선택하셨습니다.");
 			this.customer.setStore(store);
@@ -61,7 +64,7 @@ public class MemberController {
 			int menuCount = sc.nextInt();
 			customer.orderMenu(menuCount, menu);
 			boolean stop = false;
-			while (stop) {
+			while (stop==false) {
 				System.out.println("계속 하시겠습니까? (y/n)");
 				String addMore = sc.nextLine();
 				if (addMore.equals("y")) {
@@ -129,14 +132,38 @@ public class MemberController {
 			}
 			
 			// 가맹점의 결제내역 업데이트
-			headInfoManager.setStore(store);
+			headInfo.setStore(store);
 			// 사용자의 스탬프, 기프티콘 내역 업데이트
-			headInfoManager.setMember(customer);
+			headInfo.setMember(customer);
+			
+			this.goToMenu();
+			
+			
+			
+			
+			
 		} catch (Exception e) {
 			this.purchase();
 		}
 	}
+	
+	
+	public void goToMenu() {
+		try {
+			System.out.println("결제가 완료되었습니다. 종료하시겠습니까?(y/n)");
+			String select2 = sc.next();
+			if (select2.equals("y")) {
+				headInfo.save();
+			} else if (select2.equals("n")) {
+				this.selectStore();
+			} else {
+				System.out.println("올바른 값을 입력하세요");
+				this.goToMenu();
+			}
+		} catch (Exception e) {
+		}
 
+	}
 
 	public Customer getCustomer() {
 		return customer;
@@ -164,5 +191,17 @@ public class MemberController {
     		
     	}
     }
+
+
+	public Controller getController() {
+		return controller;
+	}
+
+
+	public void setController(Controller controller) {
+		this.controller = controller;
+	}
+    
+    
 
 }

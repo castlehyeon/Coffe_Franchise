@@ -1,8 +1,10 @@
 package member;
 
+import java.io.Serializable;
+
 import menu.Menu;
 
-public class Order {
+public class Order implements Serializable{
 	private int menuCount;
 	private Menu menu;
 	

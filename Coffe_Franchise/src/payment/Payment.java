@@ -1,8 +1,9 @@
 package payment;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public abstract class Payment {
+public abstract class Payment implements Serializable{
 	private int PaymetAmount;
 	private LocalDateTime PaymentTime;
 
