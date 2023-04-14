@@ -27,14 +27,14 @@ public class Controller{
 		if(info!=null) {
 			headquarterInfoManage.setHeadquarterInfoMap(info);
 		}
+		headquarter.getStoreAdminList().add(new StoreAdmin("abc","aaaaaa1!","000-0000-0000"));
     }
     public void start() {
-    	adminController.setController(this);
-    	memberController.setController(this);
-    	storeOwnerController.setController(this);
-    	Scanner sc = new Scanner(System.in);
-    	boolean run = true;
-    	headquarter.getStoreAdminList().add(new StoreAdmin("abc","aaaaaa1!","000-0000-0000"));
+		adminController.setController(this);
+		memberController.setController(this);
+		storeOwnerController.setController(this);
+		Scanner sc = new Scanner(System.in);
+		boolean run = true;
 		System.out.println("***********이디야에 오신 것을 환영합니다.***********");
 		System.out.println("1. 로그인하기 2. 회원가입하기 3. 종료하기 ");
 		int temp = sc.nextInt();
