@@ -1,5 +1,6 @@
 package member;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -102,7 +103,7 @@ public class MemberController {
 			System.out.println("1.카드	2.현금	3.기프티콘");
 			int select = sc.nextInt();
 			List<Sales> sales = store.getSalesList();
-			
+
 			switch (select) {
 			case 1:
 				sales.add(customer.payProducts(new Credit(), totalPrice));
