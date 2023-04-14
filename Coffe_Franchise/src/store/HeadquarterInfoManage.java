@@ -184,6 +184,21 @@ public class HeadquarterInfoManage implements Serializable{
         }
     }
 
+    
+    //가맹점코드로 가맹점 가져오기
+    public Store getStore(int storeCode){
+    	Store findStore = null;
+        if (headquarterInfoMap.containsKey("stores")) {
+            List<Store> storeList = (List<Store>) headquarterInfoMap.get("stores");
+            for(Store s : storeList) {
+            	if(s.getStoreCode() == storeCode){
+            		findStore = s;
+            	}
+            }
+        }
+        return findStore;
+    }
+    
     public Store setMyStore(StoreOwner storeOwner) {
     	Store mystore = null;
     	if (headquarterInfoMap.containsKey("stores")) {

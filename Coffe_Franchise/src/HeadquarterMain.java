@@ -1,8 +1,4 @@
 import global.Controller;
-import member.Member;
-import member.StoreAdmin;
-import store.Headquarter;
-import store.HeadquarterInfoManage;
 
 public class HeadquarterMain {
 
@@ -11,8 +7,8 @@ public class HeadquarterMain {
 		Controller controller = new Controller();
 		controller.prepare();
 		controller.start();
-
-		
+//		AdminController con = new AdminController();
+//		con.start();
 	}
 
 }

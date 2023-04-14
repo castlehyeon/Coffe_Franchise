@@ -268,7 +268,11 @@ public class AdminController {
     	
     	for(Member m : headquarter.getMemberList()) {
     		if (m.getID().equals(id)) {
-				StoreOwner storeAdmin = new StoreOwner(m.getID(), m.getPassword(), m.getPhoneNumber(), storeCode);
+                int index =headquarter.getMemberList().indexOf(m);
+                headquarter.getMemberList().remove(index);
+                StoreOwner storeAdmin = new StoreOwner(m.getID(), m.getPassword(), m.getPhoneNumber(), storeCode);
+                headquarter.getMemberList().add(storeAdmin);
+                System.out.println(storeAdmin.getID() + "님을 " + headquarterInfoManage.getStore(storeCode) + "지점 가맹점주로 수정했습니다.");
 				
     		}
     	}
