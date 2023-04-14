@@ -10,7 +10,7 @@ public class Cash extends Payment implements Serializable{
 	}
 	
 	public int returnChange() {
-		return this.getPaymetAmount()-this.inputMoney;
+		return this.inputMoney-this.getPaymetAmount();
 	}
 
 	public int getInputMoney() {
