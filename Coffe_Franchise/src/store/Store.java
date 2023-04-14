@@ -78,8 +78,8 @@ public class Store implements Serializable {
 
 	@Override
 	public String toString() {
-		return " [ 가맹점 코드 : " + storeCode + ", 가맹점 명 : " + name + ", 주소 : " + address + ", 전화번호 : "
-				+ phoneNumber + "]";
+		return " 가맹점 코드 : " + storeCode + ", 가맹점 명 : " + name + ", 주소 : " + address + ", 전화번호 : "
+				+ phoneNumber + " ";
 	}
 
 

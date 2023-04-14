@@ -196,7 +196,7 @@ public class AdminController {
     			headquarter.getMemberList().remove(index);
     			StoreOwner storeAdmin = new StoreOwner(m.getID(), m.getPassword(), m.getPhoneNumber(), storeCode);
 				headquarter.getMemberList().add(storeAdmin);
-				System.out.println(storeAdmin.getID() + "님을 " + headquarterInfoManage.getStore(storeCode) + "지점 가맹점주로 수정했습니다.");
+				System.out.println(storeAdmin.getID() + "님을 " + headquarterInfoManage.getStore(storeCode).getName() + "지점 가맹점주로 수정했습니다.");
 				
     		}
     	}

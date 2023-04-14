@@ -2,6 +2,7 @@ package member;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -26,6 +27,7 @@ public class StoreOwnerController {
 
 	public void setStoreOwner(StoreOwner storeOwner) {
 		this.storeOwner = storeOwner;
+		this.myStore = headquarterInfoManage.setMyStore(storeOwner);
 	}
 	
 	public void start() {
@@ -40,9 +42,9 @@ public class StoreOwnerController {
         int menuNum = sc.nextInt();
 
         switch (menuNum) {
-            case 1 : //showTotal();			break;//매출 보기
-            case 2 : updateStoreInfo();		break;//개맹점 정보 변경
-            case 0 : this.controller.start(); break;
+            case 1 : showTotalSalesByTime();	break;//매출 보기
+            case 2 : updateStoreInfo();			break;//개맹점 정보 변경
+            case 0 : this.controller.start(); 	break;
             default : System.out.println("유효한 값을 입력해주세요."); storeOwnerMainMenu();
         }
     }
@@ -78,7 +80,7 @@ public class StoreOwnerController {
 		this.myStore = headquarterInfoManage.setMyStore(storeOwner);
 		
 		int todayTotalSales = 0;
-		List<Sales> todaySalesList = null;
+		List<Sales> todaySalesList = new ArrayList<>();
 		LocalDate today = LocalDate.now();
 		Map<Integer,Integer> timeTotalPay = new HashMap();
 		

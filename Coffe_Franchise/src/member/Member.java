@@ -36,7 +36,6 @@ public abstract class Member implements Serializable {
 
 	@Override
 	public String toString() {
-		return "[ 회원 ID : " + ID + "회원 전화번호" + phoneNumber +
-				"]";
+		return "[ 회원 ID : " + ID + " 회원 전화번호 : " + phoneNumber + "]";
 	}
 }
