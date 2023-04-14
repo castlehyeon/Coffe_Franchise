@@ -1,6 +1,8 @@
 package payment;
 
-public class Cash extends Payment {
+import java.io.Serializable;
+
+public class Cash extends Payment implements Serializable{
 	private int inputMoney;
 	
 	public Cash(int inputMoney) {

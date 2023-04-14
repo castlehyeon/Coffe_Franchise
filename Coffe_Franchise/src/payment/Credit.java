@@ -1,4 +1,6 @@
 package payment;
 
-public class Credit extends Payment {
+import java.io.Serializable;
+
+public class Credit extends Payment implements Serializable{
 }

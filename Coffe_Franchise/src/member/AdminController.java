@@ -190,6 +190,7 @@ public class AdminController {
     	for(Member m : headquarter.getMemberList()) {
     		if (m.getID().equals(id)) {
 				StoreOwner storeAdmin = new StoreOwner(m.getID(), m.getPassword(), m.getPhoneNumber(), storeCode);
+				
     		}
     	}
     }

@@ -220,6 +220,7 @@ public class HeadquarterInfoManage implements Serializable{
         return storeAdminList;
         // 상점 객체 생성 로직
     }
+    //직렬화
     public void save() {
         FileOutputStream fos = null;
         ObjectOutputStream out = null;
