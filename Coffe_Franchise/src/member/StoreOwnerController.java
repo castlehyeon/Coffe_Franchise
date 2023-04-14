@@ -125,6 +125,7 @@ public class StoreOwnerController {
 	//총 매출 구하기
 	public List<Sales> totalSales() {
 		this.myStore = headquarterInfoManage.setMyStore(storeOwner);
+		
 		int todayTotalSales = 0;
 		List<Sales> todaySalesList = null;
 		LocalDate today = LocalDate.now();

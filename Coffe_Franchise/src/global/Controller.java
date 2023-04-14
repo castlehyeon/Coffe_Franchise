@@ -96,7 +96,7 @@ public class Controller{
         	id = sc.next();
         	chRun = headquarter.duplicateId(id);	//ID 중복검사
         }chRun = true;
-        
+        sc.nextLine();
         while(chRun) {
 	        System.out.print("비밀번호 입력 (영문과 특수문자 숫자를 포함하며 8자 이상 입력해주세요): ");
 	        pw = sc.nextLine();

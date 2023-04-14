@@ -10,7 +10,7 @@ public class Store implements Serializable {
 	private String name;		//지점이름
 	private String address;		//주소
 	private String phoneNumber;	//핸드폰번호
-	//private int totalSales;		//총 매출
+	private int totalSales;		//총 매출
 	private List<Sales> salesList;	//주문 정보
 
 	//상속관계를 지우기 위해 본사를 멤버필드로 갖는다. 본사의 메뉴리스트에 접근한다.
