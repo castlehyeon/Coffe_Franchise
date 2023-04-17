@@ -21,13 +21,13 @@ public class MemberController {
 	private Customer customer;
 	private Controller controller;
 	private Store store;
-    public void start() {
-    	System.out.println("고객으로 접속합니다");
-    	this.selectStore();
-    }
-    
-    
-    // 접속할 가맹점 선택
+	public void start() {
+		System.out.println("고객으로 접속합니다");
+		this.selectStore();
+	}
+
+
+	// 접속할 가맹점 선택
 	public void selectStore() {
 		boolean stop = false;
 		try {
@@ -51,8 +51,8 @@ public class MemberController {
 		}
 
 	}
-    
-    
+
+
 	// 메뉴를 선택하고 장바구니에 추가한다.
 	public void addToCart() {
 		System.out.println("-----------메뉴-----------");
@@ -86,9 +86,9 @@ public class MemberController {
 			this.addToCart();
 		}
 	}
-    
-    
-    //결제한다.
+
+
+	//결제한다.
 	public void purchase() {
 		try {
 			System.out.println("-----------주문서-----------");
@@ -105,58 +105,58 @@ public class MemberController {
 			List<Sales> sales = store.getSalesList();
 
 			switch (select) {
-			case 1:
-				sales.add(customer.payProducts(new Credit(), totalPrice));
-				store.setSalesList(sales);
-				break;
-			case 2:
-				System.out.println("현금을 투입해 주십시오");
-				int inputMoney = sc.nextInt();
-				if (totalPrice <= inputMoney) {
-					sales.add(customer.payProducts(new Cash(inputMoney), totalPrice));
+				case 1:
+					sales.add(customer.payProducts(new Credit(), totalPrice));
 					store.setSalesList(sales);
-				} else {
-					System.out.println("돈이 부족합니다.");
-					this.purchase();
-				}
-				break;
-			case 3:
-				int menuCount = 0;
-				for (Order order : this.customer.getOrders()) {
-					menuCount += order.getMenuCount();
-				}
+					break;
+				case 2:
+					System.out.println("현금을 투입해 주십시오");
+					int inputMoney = sc.nextInt();
+					if (totalPrice <= inputMoney) {
+						sales.add(customer.payProducts(new Cash(inputMoney), totalPrice));
+						store.setSalesList(sales);
+					} else {
+						System.out.println("돈이 부족합니다.");
+						this.purchase();
+					}
+					break;
+				case 3:
+					int menuCount = 0;
+					for (Order order : this.customer.getOrders()) {
+						menuCount += order.getMenuCount();
+					}
 
-				if (this.customer.getGifticon() >= menuCount) {
-					sales.add(customer.payProducts(new Gifticon(), totalPrice));
-					this.customer.setGifticon(this.customer.getGifticon() - menuCount);
-					store.setSalesList(sales);
-				} else {
-					System.out.println("기프티콘이 부족합니다.");
+					if (this.customer.getGifticon() >= menuCount) {
+						sales.add(customer.payProducts(new Gifticon(), totalPrice));
+						this.customer.setGifticon(this.customer.getGifticon() - menuCount);
+						store.setSalesList(sales);
+					} else {
+						System.out.println("기프티콘이 부족합니다.");
+						this.purchase();
+					}
+					break;
+				default:
+					System.out.println("올바른 결제 방법을 선택하십시오");
 					this.purchase();
-				}
-				break;
-			default:
-				System.out.println("올바른 결제 방법을 선택하십시오");
-				this.purchase();
 			}
-			
+
 			// 가맹점의 결제내역 업데이트
 			headInfo.setStore(store);
 			// 사용자의 스탬프, 기프티콘 내역 업데이트
 			headInfo.setMember(customer);
-			
+
 			this.goToMenu();
-			
-			
-			
-			
-			
+
+
+
+
+
 		} catch (Exception e) {
 			this.purchase();
 		}
 	}
-	
-	
+
+
 	public void goToMenu() {
 		try {
 			System.out.println("결제가 완료되었습니다. 종료하시겠습니까?(y/n)");
@@ -192,14 +192,14 @@ public class MemberController {
 	public void setStore(Store store) {
 		this.store = store;
 	}
-    
-    
-    public int binarySearch(List<Store> storeList, int keyIndex) {
-    	int temp = storeList.get(keyIndex).getStoreCode();
-    	while(true) {
-    		
-    	}
-    }
+
+
+	public int binarySearch(List<Store> storeList, int keyIndex) {
+		int temp = storeList.get(keyIndex).getStoreCode();
+		while(true) {
+
+		}
+	}
 
 
 	public Controller getController() {
@@ -210,7 +210,7 @@ public class MemberController {
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
-    
-    
+
+
 
 }
